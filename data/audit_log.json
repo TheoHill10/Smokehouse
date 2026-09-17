@@ -1,0 +1,87 @@
+[
+    {
+        "action": "Recipe updated",
+        "details": "Sourdough recipe now has 10kg of Flour",
+        "date": "2026-08-27"
+    },
+    {
+        "action": "production_logged",
+        "details": "5 x Granary made, stock updated",
+        "date": "2026-08-27"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Strong White Flour': 200.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Nuts': 300.0, 'Salt': 20.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Nuts': 200.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'nuts': 200.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Nut cake - {'Nuts': 10.0, 'Eggs': 2.0, 'Strong White Flour': 20.0, 'Sugar': 5.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "production_logged",
+        "details": "5 x Sourdough made, stock updated",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Butter': 20.0, 'Light Brown Sugar': 30.0, 'Caster Sugar': 30.0, 'Eggs': 50.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Chocolate chip cookie recipe - {'Butter': 0.12, 'Light Brown Sugar': 0.075, 'Caster Sugar': 0.075, 'Eggs': 1.0}",
+        "date": "2026-09-10"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Tiffin - {'Digestive Biscuit': 3.0, 'Chocolate': 5.0, 'Carrots': 1.0}",
+        "date": "2026-09-11"
+    },
+    {
+        "action": "production_logged",
+        "details": "3 x Tiffin made, stock updated",
+        "date": "2026-09-11"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Brownies - {'Sugar': 350.0, 'Flour': 200.0, 'Egg': 2.0, 'Chocolate Powder': 65.0, 'Water': 250.0, 'Oil': 250.0}",
+        "date": "2026-09-16"
+    },
+    {
+        "action": "production_logged",
+        "details": "10 x Brownies made, stock updated",
+        "date": "2026-09-16"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Butter': 60.0, 'Yeast': 30.0}",
+        "date": "2026-09-16"
+    },
+    {
+        "action": "production_logged",
+        "details": "30 x Sourdough made, stock updated",
+        "date": "2026-09-16"
+    },
+    {
+        "action": "production_logged",
+        "details": "50 x Sourdough made, stock updated",
+        "date": "2026-09-16"
+    }
+]

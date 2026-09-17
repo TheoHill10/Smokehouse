@@ -1,0 +1,88 @@
+{
+    "Sourdough": {
+        "name": "Sourdough",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Strong White Flour": 10,
+                    "Water": 2,
+                    "Yeast": 0.5,
+                    "Salt": 0.1
+                },
+                "date_created": "26-01-01"
+            }
+        ]
+    },
+    "Granary": {
+        "name": "Granary",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Strong White Flour": 10,
+                    "Water": 2,
+                    "Yeast": 0.5,
+                    "Salt": 0.1,
+                    "Molasses": 1
+                },
+                "date_created": "26-01-01"
+            }
+        ]
+    },
+    "Nut cake": {
+        "name": "Nut cake",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Nuts": 10.0,
+                    "Eggs": 2.0,
+                    "Strong White Flour": 20.0,
+                    "Sugar": 5.0
+                },
+                "date_created": "2026-09-10"
+            }
+        ]
+    },
+    "Chocolate chip cookie recipe": {
+        "name": "Chocolate chip cookie recipe",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Butter": 0.12,
+                    "Light Brown Sugar": 0.075,
+                    "Caster Sugar": 0.075,
+                    "Eggs": 1.0
+                },
+                "date_created": "2026-09-10"
+            }
+        ]
+    },
+    "Tiffin": {
+        "name": "Tiffin",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Digestive Biscuit": 3.0,
+                    "Chocolate": 5.0,
+                    "Carrots": 1.0
+                },
+                "date_created": "2026-09-11"
+            }
+        ]
+    },
+    "Brownies": {
+        "name": "Brownies",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Sugar": 350.0,
+                    "Flour": 200.0,
+                    "Egg": 2.0,
+                    "Chocolate Powder": 65.0,
+                    "Water": 250.0,
+                    "Oil": 250.0
+                },
+                "date_created": "2026-09-16"
+            }
+        ]
+    }
+}
