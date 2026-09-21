@@ -1,7 +1,7 @@
 from storage import load_all_products, load_stock, save_stock, log_change, save_all_products
 from models import Product
 import datetime
-from utils import normalize
+from utils import normalize, convert_to_base
 
 def log_production():
     products = load_all_products("data/recipes.json")
@@ -40,10 +40,12 @@ def invoice_input():
             break
         while True:
             try:
-                quantity_order = float(input(f"Quantity of {ingredient_order} delivered: "))
+                raw_quantity = float(input(f"Quantity of {ingredient_order} delivered: "))
+                unit = input("Unit kg/g/L/ml/each: ")
+                quantity_order = convert_to_base(raw_quantity, unit)
                 break
-            except ValueError:
-                print("That's not a valid number, please try again")
+            except ValueError as error:
+                print(f"Invalid entry ({error}), please try again")
         invoice_items[ingredient_order] = quantity_order
         print(f"You entered: {ingredient_order}: {quantity_order}")
     for ingredient, quantity in invoice_items.items():
@@ -66,7 +68,9 @@ def add_recipe():
             break
         while True:
             try:
-                recipe_quantity = float(input(f"Amount of {recipe_ingredient} used: "))
+                raw_quantity = float(input(f"Amount of {recipe_ingredient} used: "))
+                unit = input("Unit (Unit kg/g/L/ml/each: ")
+                recipe_quantity = convert_to_base(raw_quantity, unit)
                 break
             except ValueError:
                 print("That's not a valid number, please try again")
