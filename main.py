@@ -1,6 +1,7 @@
 from production_input import log_production, invoice_input, add_recipe, view_recipe_details
 from storage import load_stock
 from stock_logic import check_reorder_needed
+from waste_input import log_waste
 
 while True:
     print("\n1. Log production")
@@ -8,7 +9,8 @@ while True:
     print("3. Add new recipe")
     print("4. Check reorder needed")
     print("5. Search recipe")
-    print("6. Exit")
+    print("6. Log waste")
+    print("7. Exit")
 
     choice = input("\nChoose an option: ")
 
@@ -30,6 +32,8 @@ while True:
     elif choice == "5":
         view_recipe_details()
     elif choice == "6":
+        log_waste()
+    elif choice == "7":
         break
     else:
         print("Not a valid option, try again")

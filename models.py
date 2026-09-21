@@ -68,11 +68,11 @@ class WasteEntry:
     def to_dict(self):
         return {
             "product_name": self.product_name,
-            "quantitiy_made": self.quantity_made,
-            "quantitiy_left": self.quantity_left,
+            "quantity_made": self.quantity_made,
+            "quantity_left": self.quantity_left,
             "date": self.date
         }
 
     @staticmethod
     def from_dict(data):
-        return WasteEntry(data["product_name"], data["quantitiy_made"], data["quantity_left"], data["date"])
+        return WasteEntry(data["product_name"], data["quantity_made"], data["quantity_left"], data["date"])

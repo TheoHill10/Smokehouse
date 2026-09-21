@@ -1,12 +1,6 @@
 {
-    "Strong White Flour": -300,
-    "Water": -2560.0,
-    "Yeast": 10.0,
-    "Salt": 2.0,
-    "Sugar": -3500.0,
-    "Flour": -2000.0,
-    "Egg": -20.0,
-    "Chocolate Powder": -650.0,
-    "Oil": -2500.0,
-    "Butter": 60.0
+    "Strong White Flour": 500,
+    "Water": 100,
+    "Yeast": 20,
+    "Salt": 10
 }
