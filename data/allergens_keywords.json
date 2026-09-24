@@ -1,0 +1,16 @@
+{
+    "Cereals containing gluten": ["flour", "wheat", "rye", "oat", "spelt"],
+    "Celery": ["celery"],
+    "Crustaceans": ["Crab"],
+    "Eggs": ["egg"],
+    "Fish": ["salmon"],
+    "Lupin":["lupin"],
+    "Milk": ["milk", "butter", "cream", "cheese", "yogurt"],
+    "Molluscs": ["mussels"],
+    "Mustard": ["mustard"],
+    "Nuts": ["almonds", "hazelnut", "walnut", "pecan", "cashew", "pistachio"],
+    "Peanuts": ["peanuts"],
+    "Sesame Seeds": ["sesame"],
+    "Soya": ["soy", "soya"],
+    "Sulphur Dioxide": ["apricots", "prunes", "raisins", "wine", "beer"]
+}

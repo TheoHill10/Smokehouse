@@ -1,6 +1,18 @@
 {
-    "Strong White Flour": 500,
-    "Water": 100,
-    "Yeast": 20,
-    "Salt": 10
+    "Strong White Flour": 200,
+    "Water": 40,
+    "Yeast": 5.0,
+    "Salt": 6.960000000000001,
+    "Molasses": -30,
+    "Bananas": -20.0,
+    "Butter": 0.040000000000000036,
+    "Milk": -4.8,
+    "Egg": -40.0,
+    "Vanilla Extract": -0.24,
+    "Sugar": 292.0,
+    "Peanut Butter": -4.5200000000000005,
+    "Baking Soda": -0.12,
+    "Flour": -7.640000000000001,
+    "Chocolate Chips": -5.720000000000001,
+    "Eggs": 50.0
 }

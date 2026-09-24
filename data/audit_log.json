@@ -83,5 +83,50 @@
         "action": "production_logged",
         "details": "50 x Sourdough made, stock updated",
         "date": "2026-09-16"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Banana bread - {'Bananas': 3.0, 'Butter': 0.074, 'Milk': 0.12, 'Egg': 1.0, 'Vanilla Extract': 0.006, 'Sugar': 0.2, 'Peanut Butter': 0.113, 'Baking Soda': 0.003, 'Salt': 0.001, 'Flour': 0.191, 'Chocolate Chips': 0.14300000000000002}",
+        "date": "2026-09-22"
+    },
+    {
+        "action": "production_logged",
+        "details": "20 x Granary made, stock updated",
+        "date": "2026-09-22"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Granary wasted out of 20.0 made",
+        "date": "2026-09-22"
+    },
+    {
+        "action": "production_logged",
+        "details": "10 x Granary made, stock updated",
+        "date": "2026-09-23"
+    },
+    {
+        "action": "production_logged",
+        "details": "20 x Banana bread made, stock updated",
+        "date": "2026-09-23"
+    },
+    {
+        "action": "production_logged",
+        "details": "20 x Banana Bread made, stock updated",
+        "date": "2026-09-23"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Butter': 3.0, 'Eggs': 50.0, 'Bananas': 100.0, 'Sugar': 300.0}",
+        "date": "2026-09-23"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Shortbread - {'Butter': 0.125, 'Sugar': 0.055, 'Plain Flour': 0.18}",
+        "date": "2026-09-23"
+    },
+    {
+        "action": "waste_logged",
+        "details": "3.0 x Sourdough wasted out of 40.0 made",
+        "date": "2026-09-23"
     }
 ]

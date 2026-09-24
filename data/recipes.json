@@ -84,5 +84,39 @@
                 "date_created": "2026-09-16"
             }
         ]
+    },
+    "Banana Bread": {
+        "name": "Banana bread",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Bananas": 3.0,
+                    "Butter": 0.074,
+                    "Milk": 0.12,
+                    "Egg": 1.0,
+                    "Vanilla Extract": 0.006,
+                    "Sugar": 0.2,
+                    "Peanut Butter": 0.113,
+                    "Baking Soda": 0.003,
+                    "Salt": 0.001,
+                    "Flour": 0.191,
+                    "Chocolate Chips": 0.14300000000000002
+                },
+                "date_created": "2026-09-22"
+            }
+        ]
+    },
+    "Shortbread": {
+        "name": "Shortbread",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Butter": 0.125,
+                    "Sugar": 0.055,
+                    "Plain Flour": 0.18
+                },
+                "date_created": "2026-09-23"
+            }
+        ]
     }
 }
