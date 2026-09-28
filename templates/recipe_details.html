@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ name }}</h1>
+<ul>
+    {% for ingredient, quantity in current_recipe.items() %}
+    <li>{{ ingredient }}: {{quantity}}</li>
+    {% endfor %}
+</ul>
+
+<h2>Allergens</h2>
+{% if allergens %}
+<ul>
+    {% for allergen in allergens %}
+    <li>{{ allergen }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No allergens flagged.</p>
+{% endif %}
+
+{% endblock %}
