@@ -22,5 +22,17 @@
         "quantity_made": 40.0,
         "quantity_left": 2.0,
         "date": "2026-09-24"
+    },
+    {
+        "product_name": "Banana Bread",
+        "quantity_made": 30.0,
+        "quantity_left": 5.0,
+        "date": "2026-09-29"
+    },
+    {
+        "product_name": "Tiffin",
+        "quantity_made": 10.0,
+        "quantity_left": 25.0,
+        "date": "2026-09-30"
     }
 ]

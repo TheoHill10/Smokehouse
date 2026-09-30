@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Log waste</h1>
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+<form method="POST" action="/waste">
+    <label>Product: <input type="text" name="product_name" required></label><br>
+    <label>Amount wasted: <input type="number" step=any name="quantity_left" required></label><br>
+    <label>Amount made: <input type="number" step=any name="quantity_made" required></label><br>
+    <button type="submit">Log waste</button>
+</form>
+
+<h2>Waste summary</h2>
+{%if summary %}
+<ul>
+    {% for product, details in summary.items() %}
+    <li>{{ product }}: {{ details.wasted }} wasted out of {{ details.made }} made ({{ details.percent }}%)</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No waste logged yet</p>
+{% endif %}
+{% endblock %}

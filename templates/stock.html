@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Current Stock</h1>
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
 <table border="1">
     <tr><th>Ingredient</th><th>Quantity</th></tr>
     {% for ingredient, quantity in stock.items() %}
@@ -10,13 +13,29 @@
 
 <h1>Reorder Check</h1>
 {% if  reorder %}
-<u1> 
+<ul> 
     {% for ingredient, shortfall in reorder.items() %}
     <li>{{ ingredient }} is below minimum by {{ shortfall }}</li>
     {% endfor %}
-</u1>
+</ul>
 {% else %}
 <p>Nothing needs to be reordered</p>
 {% endif %}
+
+<h2>Add Invoice</h2>
+<form method="POST" action="/stock">
+    <label>Ingredient: <input type="text" name="ingredient" required></label><br>
+    <label>Quantity: <input type="number" step="any" name="quantity" required></label><br>
+    <label>Unit:
+        <select name="unit">
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="l">l</option>
+            <option value="ml">ml</option>
+            <option value="each">each</option>
+        </select>
+    </label><br>
+    <button type="submit">Add to Stock</button>
+</form>
 
 {% endblock %}

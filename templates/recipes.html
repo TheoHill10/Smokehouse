@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Recipes</h1>
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+<form method="GET" action="/recipes">
+    <input type="text" name="search" placeholder="Search recipes..." value="{{ search }}">
+    <button type="submit">Search</button>
+</form>
+
 {% if recipes %}
 <ul>
     {% for name in recipes %}
@@ -11,4 +19,12 @@
 <p>No recipe exist yet</p>
 {% endif %}
 
+<h2>Add recipe</h2>
+<form method="POST" action="/recipes">
+    <label>Recipe name: <input type="text" name="recipe_name" required></label><br>
+    <label>Ingredient (one per line, format: ingredient, quantity, unit): 
+        <textarea name="ingredient_text" rows="6" cols="40" placeholder="Strong White Flour, 10, kg&#10;Water, 2, 1" required></textarea>
+    </label><br>
+    <button type="submit">Add recipe</button>
+</form>
 {% endblock %}

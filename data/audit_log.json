@@ -138,5 +138,55 @@
         "action": "waste_logged",
         "details": "2.0 x Sourdough wasted out of 40.0 made",
         "date": "2026-09-24"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Bananas': 40.0}",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Oil': 3000.0}",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Water': 10000000.0}",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Sugar': 4000.0}",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "production_logged",
+        "details": "20.0 x Sourdough made, stock updated",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Banana Bread made, stock updated",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "waste_logged",
+        "details": "5.0 x Banana Bread wasted out of 30.0 made",
+        "date": "2026-09-29"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Strong White Flour': 50.0}",
+        "date": "2026-09-30"
+    },
+    {
+        "action": "production_logged",
+        "details": "25.0 x Tiffin made, stock updated",
+        "date": "2026-09-30"
+    },
+    {
+        "action": "waste_logged",
+        "details": "25.0 x Tiffin wasted out of 10.0 made",
+        "date": "2026-09-30"
     }
 ]
