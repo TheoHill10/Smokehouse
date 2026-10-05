@@ -1,6 +1,6 @@
 import json
 import datetime
-from models import Product, AuditEntry, WasteEntry
+from models import Product, AuditEntry, WasteEntry, ProductionEntry
 
 def save_stock(stock_levels, filepath):
     with open(filepath, "w") as file:
@@ -50,3 +50,8 @@ def load_waste_log(filepath):
     for entry_data in raw:
         entries.append(WasteEntry.from_dict(entry_data))
     return entries
+
+def load_production_log(filepath):
+    with open(filepath, "r") as file:
+        raw = json.load(file)
+    return [ProductionEntry.from_dict(d) for d in raw]

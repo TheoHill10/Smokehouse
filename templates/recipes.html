@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Recipes</h1>
 {% if error %}
-<p style="color:red;">{{ error }}</p>
+<p class="error">{{ error }}</p>
 {% endif %}
 <form method="GET" action="/recipes">
     <input type="text" name="search" placeholder="Search recipes..." value="{{ search }}">
@@ -12,12 +12,13 @@
 {% if recipes %}
 <ul>
     {% for name in recipes %}
-    <li><a href="/recipes/{{ name }}">{{ name }} </a></li>
+    <li class="recipe-card"><a href="/recipes/{{ name }}">{{ name }} </a></li>
     {% endfor %}
 </ul>
 {% else %}
 <p>No recipe exist yet</p>
 {% endif %}
+
 
 <h2>Add recipe</h2>
 <form method="POST" action="/recipes">

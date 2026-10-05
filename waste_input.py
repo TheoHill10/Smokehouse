@@ -48,3 +48,14 @@ def waste_summary():
             print(f"{product}: {data['wasted']} wasted out of {data['made']} made, {data['percent']}% wasted")
         else:
             print(f"{product}: quantitiy made is 0, cannot calculate percentage")
+
+def calculate_todays_production(product_name, production_log, date=None):
+    if date is None:
+        date = str(datetime.date.today())
+    total = 0
+    found = False
+    for entry in production_log:
+        if entry.product_name == product_name and entry.date == date:
+            total += entry.quantitiy_made
+            found = True
+    return total, found

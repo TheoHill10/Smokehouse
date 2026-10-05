@@ -76,3 +76,17 @@ class WasteEntry:
     @staticmethod
     def from_dict(data):
         return WasteEntry(data["product_name"], data["quantity_made"], data["quantity_left"], data["date"])
+
+
+class ProductionEntry:
+    def __init__(self, product_name, quantity_made, date):
+        self.product_name = product_name
+        self.quantity_made = quantity_made
+        self.date = date
+
+    def to_dict(self):
+        return {"product_name": self.product_name, "quantity_made": self.quantity_made, "date": self.date}
+
+    @staticmethod
+    def from_dict(data):
+        return ProductionEntry(data["product_name"], data["quantity_made"], data["date"])

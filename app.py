@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect
+import datetime
 from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products
 from stock_logic import check_reorder_needed
 from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated
 from waste_input import calculate_waste_update, calcualte_waste_summary
-from utils import normalize, convert_to_base
+from utils import normalize, convert_to_base, recipe_to_text
 
 app = Flask(__name__)
 @app.route("/")
@@ -59,6 +60,9 @@ def waste_log():
     if request.method == "POST":
         try:
             product_name = normalize(request.form["product_name"])
+            products = load_all_products("data/recipes.json")
+            if product_name not in products:
+                raise KeyError
             quantity_made = float(request.form["quantity_made"])
             quantity_left = float(request.form["quantity_left"])
             raw_waste_log = load_stock("data/waste_log.json")
@@ -111,6 +115,33 @@ def recipe_details(name):
     current_recipe = product_object.recipe_history[-1].ingredients
     allergens = get_recipe_allergen(current_recipe, allergens)
     return render_template("recipe_details.html", name=name, current_recipe=current_recipe, allergens=allergens)
+
+@app.route("/recipes/<name>/update", methods=["GET", "POST"])
+def update_recipes_page(name):
+    error = None
+    products = load_all_products("data/recipes.json")
+    product_object = products[name]
+    if request.method == "POST":
+        try:
+            ingredient_text = request.form["ingredient_text"]
+            recipe = {}
+            for line in ingredient_text.strip().split("\n"):
+                parts = line.split(",")
+                ingredient = normalize(parts[0])
+                raw_quantity = float(parts[1])
+                unit = parts[2].strip()
+                recipe[ingredient] = convert_to_base(raw_quantity, unit)
+            date = str(datetime.date.today())
+            product_object.update_recipe(recipe, date)
+            products[name] = product_object
+            save_all_products(products, "data/recipes.json")
+            log_change("Recipe added", f":Recipe updated: {name} recipe updated - {recipe}", "data/audit_log.json")
+            return redirect(f"/recipes/{name}")
+        except (IndexError, ValueError):
+            error = "Check your ingredient list is formatted as ingredient, quanity, unit. One per line"
+    current_recipe = product_object.recipe_history[-1].ingredients
+    prefill_text = recipe_to_text(current_recipe)
+    return render_template("update_recipes.html", name=name, prefill_text=prefill_text, error=error)
 
 if __name__ == "__main__":
     app.run(debug=True)

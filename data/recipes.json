@@ -10,6 +10,15 @@
                     "Salt": 0.1
                 },
                 "date_created": "26-01-01"
+            },
+            {
+                "ingredients": {
+                    "Strong White Flour": 10.0,
+                    "Water": 0.003,
+                    "Yeast": 0.5,
+                    "Salt": 0.1
+                },
+                "date_created": "2026-10-05"
             }
         ]
     },

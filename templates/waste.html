@@ -3,7 +3,7 @@
 
 <h1>Log waste</h1>
 {% if error %}
-<p style="color:red;">{{ error }}</p>
+<p class="error">{{ error }}</p>
 {% endif %}
 <form method="POST" action="/waste">
     <label>Product: <input type="text" name="product_name" required></label><br>

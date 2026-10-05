@@ -17,3 +17,9 @@ def find_allergens(ingredient_name, allergen_keywords):
                 found.append(allergen)
                 break
     return found
+
+def recipe_to_text(recipe):
+    lines = []
+    for ingredient, quantity in recipe.items():
+        lines.append(f"{ingredient}, {quantity}, kg or ml")
+    return "\n".join(lines)

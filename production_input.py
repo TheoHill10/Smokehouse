@@ -1,5 +1,5 @@
 from storage import load_all_products, load_stock, save_stock, log_change, save_all_products
-from models import Product
+from models import Product, ProductionEntry
 import datetime
 from utils import normalize, convert_to_base, find_allergens
 
@@ -147,3 +147,9 @@ def view_recipe_details():
     else:
         print("No allegens flagged")
 
+def calculate_production_log_entry(product_name, amount, production_log):
+    date = str(datetime.date.today)
+    new_entry = ProductionEntry(product_name, amount, date)
+    updated_log = list(production_log)
+    updated_log.append(new_entry.to_dict())
+    return updated_log

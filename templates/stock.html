@@ -2,12 +2,12 @@
 {% block content %}
 <h1>Current Stock</h1>
 {% if error %}
-<p style="color:red;">{{ error }}</p>
+<p class="error">{{ error }}</p>
 {% endif %}
 <table border="1">
     <tr><th>Ingredient</th><th>Quantity</th></tr>
     {% for ingredient, quantity in stock.items() %}
-    <tr><td>{{ ingredient }}</td><td>{{ quantity }}</td></tr>
+    <tr><td>{{ ingredient }}</td><td>{{ quantity | round(2) }}</td></tr>
     {% endfor %}
 </table>
 
@@ -15,7 +15,7 @@
 {% if  reorder %}
 <ul> 
     {% for ingredient, shortfall in reorder.items() %}
-    <li>{{ ingredient }} is below minimum by {{ shortfall }}</li>
+    <li>{{ ingredient }} is below minimum by {{ shortfall | round(2) }}</li>
     {% endfor %}
 </ul>
 {% else %}

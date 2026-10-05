@@ -34,5 +34,11 @@
         "quantity_made": 10.0,
         "quantity_left": 25.0,
         "date": "2026-09-30"
+    },
+    {
+        "product_name": "Rye",
+        "quantity_made": 30.0,
+        "quantity_left": 6.0,
+        "date": "2026-10-01"
     }
 ]

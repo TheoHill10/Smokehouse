@@ -1,0 +1,124 @@
+:root{
+    --color-bg: #fdf6ec;
+    --color-primary: #7b4b27;
+    --color-primary-dark: #5c3a1e;
+    --colour-text: #2e2e2e;
+    --color-border: #d8c3a5;
+    --spacing: 1rem;
+}
+
+body {
+    font-family: Georgia, serif;
+    background-color: var(--color-bg);
+    color: var(--colour-text);
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: var(--color-primary);
+    padding: var(--spacing);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing);
+}
+
+h1, h2 {
+    color: var(--color-primary-dark)
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: var(--spacing);
+}
+
+th, td {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-primary);
+    color: white
+}
+
+form {
+    background-color: white;
+    border: 1px solid var(--color-border);
+    padding: var(--spacing);
+    border-radius: 8px;
+    max-width: 400px;
+    margin-bottom: var(--spacing);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.4rem;
+    margin-top: 0.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.6rem, 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.error {
+    color: #a33;
+    background-color: #fbeaea;
+    border: 1px solid #a33;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.recipe-card{
+    background-color: white;
+    border: 1px solid var(--color-border);
+    padding: var(--spacing);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.recipe-card a{
+    display: block;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.recipe-card:hover {
+    background-color: var(--color-bg);
+    border-color: var(--color-primary);
+}

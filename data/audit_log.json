@@ -188,5 +188,20 @@
         "action": "waste_logged",
         "details": "25.0 x Tiffin wasted out of 10.0 made",
         "date": "2026-09-30"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Carrot': -1.0}",
+        "date": "2026-10-01"
+    },
+    {
+        "action": "waste_logged",
+        "details": "6.0 x Rye wasted out of 30.0 made",
+        "date": "2026-10-01"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":Recipe updated: Sourdough recipe updated - {'Strong White Flour': 10.0, 'Water': 0.003, 'Yeast': 0.5, 'Salt': 0.1}",
+        "date": "2026-10-05"
     }
 ]
