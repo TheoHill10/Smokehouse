@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect
 import datetime
-from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products
+from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products, load_production_log
 from stock_logic import check_reorder_needed
-from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated
-from waste_input import calculate_waste_update, calcualte_waste_summary
+from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry
+from waste_input import calculate_waste_update, calcualte_waste_summary, calculate_todays_production
 from utils import normalize, convert_to_base, recipe_to_text
 
 app = Flask(__name__)
@@ -46,6 +46,9 @@ def production_log():
             product_object = products[product_name]
             ingredients_used, updated_stock = calculate_production_update(product_object, amount, stock)
             save_stock(updated_stock, "data/stock.json")
+            raw_production_log = load_stock("data/production_log.json")
+            updated_production_log = calculate_production_log_entry(product_name, amount, raw_production_log)
+            save_stock(updated_production_log, "data/production_log.json")
             log_change("production_logged", f"{amount} x {product_name} made, stock updated", "data/audit_log.json")
         except KeyError:
             error = "No product found with that name"
@@ -63,12 +66,18 @@ def waste_log():
             products = load_all_products("data/recipes.json")
             if product_name not in products:
                 raise KeyError
-            quantity_made = float(request.form["quantity_made"])
             quantity_left = float(request.form["quantity_left"])
-            raw_waste_log = load_stock("data/waste_log.json")
-            updated_waste_log = calculate_waste_update(product_name, quantity_made, quantity_left, raw_waste_log)
-            save_stock(updated_waste_log, "data/waste_log.json")
-            log_change("waste_logged", f"{quantity_left} x {product_name} wasted out of {quantity_made} made", "data/audit_log.json")
+            production_log = load_production_log("data/production_log.json")
+            todays_production, found = calculate_todays_production(product_name, production_log)
+            if not found: 
+                error = "No production logged for this product today - log production first"
+            else:
+                raw_waste_log = load_stock("data/waste_log.json")
+                updated_waste_log = calculate_waste_update(product_name, todays_production, quantity_left, raw_waste_log)
+                save_stock(updated_waste_log, "data/waste_log.json")
+                log_change("waste_logged", f"{quantity_left} x {product_name} wasted out of {todays_production} made", "data/audit_log.json")
+        except KeyError:
+            error = "No product found with that name"
         except ValueError:
             error = "Please enter a valid number amount"
     waste_log = load_waste_log("data/waste_log.json")

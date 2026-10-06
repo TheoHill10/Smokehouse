@@ -203,5 +203,25 @@
         "action": "Recipe added",
         "details": ":Recipe updated: Sourdough recipe updated - {'Strong White Flour': 10.0, 'Water': 0.003, 'Yeast': 0.5, 'Salt': 0.1}",
         "date": "2026-10-05"
+    },
+    {
+        "action": "production_logged",
+        "details": "20.0 x Sourdough made, stock updated",
+        "date": "2026-10-05"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Sourdough wasted out of 20.0 made",
+        "date": "2026-10-05"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Granary made, stock updated",
+        "date": "2026-10-06"
+    },
+    {
+        "action": "waste_logged",
+        "details": "3.0 x Granary wasted out of 30.0 made",
+        "date": "2026-10-06"
     }
 ]

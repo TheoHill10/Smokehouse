@@ -32,7 +32,7 @@
     {
         "product_name": "Tiffin",
         "quantity_made": 10.0,
-        "quantity_left": 25.0,
+        "quantity_left": 5.0,
         "date": "2026-09-30"
     },
     {
@@ -40,5 +40,17 @@
         "quantity_made": 30.0,
         "quantity_left": 6.0,
         "date": "2026-10-01"
+    },
+    {
+        "product_name": "Sourdough",
+        "quantity_made": 20.0,
+        "quantity_left": 2.0,
+        "date": "2026-10-05"
+    },
+    {
+        "product_name": "Granary",
+        "quantity_made": 30.0,
+        "quantity_left": 3.0,
+        "date": "2026-10-06"
     }
 ]

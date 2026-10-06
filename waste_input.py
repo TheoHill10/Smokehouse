@@ -56,6 +56,6 @@ def calculate_todays_production(product_name, production_log, date=None):
     found = False
     for entry in production_log:
         if entry.product_name == product_name and entry.date == date:
-            total += entry.quantitiy_made
+            total += entry.quantity_made
             found = True
     return total, found
