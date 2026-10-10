@@ -223,5 +223,60 @@
         "action": "waste_logged",
         "details": "3.0 x Granary wasted out of 30.0 made",
         "date": "2026-10-06"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Granary made, stock updated",
+        "date": "2026-10-06"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Granary wasted out of 60.0 made",
+        "date": "2026-10-06"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Butter': 25.0}",
+        "date": "2026-10-08"
+    },
+    {
+        "action": "production_logged",
+        "details": "12.0 x Sourdough made, stock updated",
+        "date": "2026-10-08"
+    },
+    {
+        "action": "waste_logged",
+        "details": "1.0 x Sourdough wasted out of 12.0 made",
+        "date": "2026-10-08"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Bananas': 80.0}",
+        "date": "2026-10-08"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Granary made, stock updated",
+        "date": "2026-10-08"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Granary wasted out of 30.0 made",
+        "date": "2026-10-08"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Salt': 10.0}",
+        "date": "2026-10-10"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Sourdough made, stock updated",
+        "date": "2026-10-10"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Sourdough wasted out of 30.0 made",
+        "date": "2026-10-10"
     }
 ]

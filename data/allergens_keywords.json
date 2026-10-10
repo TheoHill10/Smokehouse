@@ -5,12 +5,12 @@
     "Eggs": ["egg"],
     "Fish": ["salmon"],
     "Lupin":["lupin"],
-    "Milk": ["milk", "butter", "cream", "cheese", "yogurt"],
+    "Milk": ["milk", "butter", "cream", "cheese", "yogurt", "chocolate"],
     "Molluscs": ["mussels"],
     "Mustard": ["mustard"],
     "Nuts": ["almonds", "hazelnut", "walnut", "pecan", "cashew", "pistachio", "nuts"],
-    "Peanuts": ["peanuts"],
-    "Sesame Seeds": ["sesame"],
+    "Peanuts": ["peanuts", "peanut butter"],
+    "Sesame Seeds": ["sesame", "tahini"],
     "Soya": ["soy", "soya"],
     "Sulphur Dioxide": ["apricots", "prunes", "raisins", "wine", "beer"]
 }

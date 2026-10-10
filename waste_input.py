@@ -27,10 +27,14 @@ def log_waste():
     log_change("waste_logged", f"{quantity_left} x {product_name} wasted out of {quantity_made} made", "data/audit_log.json")
     print(f"{quantity_made} {product_name} made, {quantity_left} wasted")
 
-def calcualte_waste_summary(waste_log):
+def calculate_waste_summary(waste_log, start_date=None, end_date=None):
     total_made = {}
     total_wasted = {}
     for entry in waste_log:
+        if start_date and entry.date < start_date:
+            continue
+        if end_date and entry.date > end_date:
+            continue
         product = entry.product_name
         total_made[product] = total_made.get(product, 0) + entry.quantity_made
         total_wasted[product] = total_wasted.get(product, 0) + entry.quantity_left
@@ -42,7 +46,7 @@ def calcualte_waste_summary(waste_log):
     return summary
 def waste_summary():
     waste_log = load_waste_log("data/waste_log.json")
-    summary = calcualte_waste_summary(waste_log)
+    summary = calculate_waste_summary(waste_log)
     for product, data in summary.items():
         if data["percent"] is not None:
             print(f"{product}: {data['wasted']} wasted out of {data['made']} made, {data['percent']}% wasted")

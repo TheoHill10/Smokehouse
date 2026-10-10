@@ -3,13 +3,32 @@ import datetime
 from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products, load_production_log
 from stock_logic import check_reorder_needed
 from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry
-from waste_input import calculate_waste_update, calcualte_waste_summary, calculate_todays_production
+from waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production
 from utils import normalize, convert_to_base, recipe_to_text
+from dashboard_logic import find_highest, calculate_total_production
+
 
 app = Flask(__name__)
 @app.route("/")
 def home():
-    return render_template("index.html")
+    stock = load_stock("data/stock.json")
+    minimum_stock = load_stock("data/minimum_stock.json")
+    reorder = check_reorder_needed(stock, minimum_stock)
+    recipes = load_all_products("data/recipes.json")
+    production_log = load_production_log("data/production_log.json")
+    waste_log = load_waste_log("data/waste_log.json")
+    today = str(datetime.date.today())
+    today_production_total = calculate_total_production(production_log, today)
+    today_waste_summary = calculate_waste_summary(waste_log, start_date=today, end_date=today)
+    total_made_today, total_wasted_today = 0, 0
+    for details in today_waste_summary.values():
+        total_made_today += details["made"]
+        total_wasted_today += details["wasted"]
+    waste_percent_today = round((total_wasted_today / total_made_today) * 100, 2) if total_made_today > 0 else None
+    all_time_waste_summary = calculate_waste_summary(waste_log)
+    most_wasted_product, most_wasted_value = find_highest(all_time_waste_summary, "wasted")
+    stock_preview = dict(list(stock.items())[:5])
+    return render_template("dashboard.html", reorder_count=len(reorder), recipe_count=len(recipes), today_production_total=today_production_total, waste_percent_today=waste_percent_today, stock_preview=stock_preview, most_wasted_product=most_wasted_product, most_wasted_value=most_wasted_value)
 
 @app.route("/stock", methods=["GET", "POST"])
 def stock_page():
@@ -81,8 +100,10 @@ def waste_log():
         except ValueError:
             error = "Please enter a valid number amount"
     waste_log = load_waste_log("data/waste_log.json")
-    summary = calcualte_waste_summary(waste_log)
-    return render_template("waste.html", summary=summary, error=error)
+    today = str(datetime.date.today())
+    summary_all_time = calculate_waste_summary(waste_log)
+    summary_today = calculate_waste_summary(waste_log, start_date=today, end_date=today)
+    return render_template("waste.html", summary_today=summary_today, summary_all_time=summary_all_time, error=error)
 
 @app.route("/recipes", methods=["GET", "POST"])
 def recipes_page():

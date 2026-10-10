@@ -11,10 +11,21 @@
     <button type="submit">Log waste</button>
 </form>
 
-<h2>Waste summary</h2>
-{%if summary %}
+<h2>Today's Waste</h2>
+{%if summary_today %}
 <ul>
-    {% for product, details in summary.items() %}
+    {% for product, details in summary_today.items() %}
+    <li>{{ product }}: {{ details.wasted }} wasted out of {{ details.made }} made ({{ details.percent }}%)</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No waste logged yet</p>
+{% endif %}
+
+<h2>All-Time Waste</h2>
+{% if summary_all_time %}
+<ul>
+    {% for product, details in summary_all_time.items() %}
     <li>{{ product }}: {{ details.wasted }} wasted out of {{ details.made }} made ({{ details.percent }}%)</li>
     {% endfor %}
 </ul>

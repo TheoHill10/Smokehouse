@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="tile-row">
+    <a href="/stock" class="tile">
+        <div>Items to reorder</div>
+        <div class="tile-number">{{ reorder_count }}</div>
+    </a>
+    <a href="/recipes" class="tile">
+        <div>Recipes</div>
+        <div class="tile-number">{{ recipe_count }}</div>
+    </a>
+    <a href="/production" class="tile">
+        <div>Made today</div>
+        <div class="tile-number">{{ today_production_total | round(1) }}</div>
+    </a>
+    <a href="/waste" class="tile">
+        <div>Waste % today</div>
+        <div class="tile-number">{% if waste_percent_today is not none %}{{ waste_percent_today }}%{% else %}-{% endif %}</div>
+    </a>
+</div>
+
+<div class="tile-row">
+    <div class="tile">
+        <h2>Stock Snapshot</h2>
+        <ul>
+            {% for ingredient, quantity in stock_preview.items() %}
+            <li>{{ ingredient }}: {{ quantity | round(2) }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/stock">View all stock &rarr;</a>
+    </div>
+    <div class="tile">
+        <h2>Product Summary</h2>
+        {% if most_wasted_product %}
+        <p>Most wasted (all time): <strong>{{ most_wasted_product }}</strong> ({{ most_wasted_value | round(2) }})</p>
+        {% else %}
+        <p>No waste data yet</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
