@@ -19,4 +19,10 @@
 {% endif %}
 
 <a href="/recipes/{{ name }}/update">Update this recipe</a>
+{% block scripts %}
+<script>
+    saveRecent({{ name | tojson }});
+</script>
+{% endblock %}
+
 {% endblock %}

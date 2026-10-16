@@ -124,6 +124,11 @@ button:hover {
     border-color: var(--color-primary);
 }
 
+#recent-recipes{
+    display: contents;
+    list-style-type: none;
+
+}
 .layout {
     display: flex;
     min-height: 100vh;
@@ -147,6 +152,10 @@ button:hover {
     padding: var(--spacing);
 }
 .sidebar a:hover{
+    text-decoration: underline;
+    color: orange;
+}
+.sidebar a.active{
     text-decoration: underline;
     color: orange;
 }
@@ -200,3 +209,33 @@ button:hover {
     font-weight: bold; 
     color: var(--color-primary-dark); 
 }
+
+.search-box { position: relative; max-width: 400px; margin-bottom: var(--spacing); }
+.search-results {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+    background: white; border: 1px solid var(--color-border); border-radius: 4px;
+    list-style: none; margin: 0; padding: 0;
+}
+.search-results:empty { display: none; }
+.search-result { padding: 0.5rem 0.75rem; cursor: pointer; }
+.search-result:hover { background-color: var(--color-bg); }
+.search-empty { padding: 0.5rem 0.75rem; color: #888; }
+
+
+.search-products {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+    background: white; border: 1px solid var(--color-border); border-radius: 4px;
+    list-style: none; margin: 0; padding: 0;
+}
+.search-products:empty { display: none; }
+.search-product { padding: 0.5rem 0.75rem; cursor: pointer; }
+.search-product:hover { background-color: var(--color-bg); }
+
+.search-waste {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+    background: white; border: 1px solid var(--color-border); border-radius: 4px;
+    list-style: none; margin: 0; padding: 0;
+}
+.search-waste:empty { display: none; }
+.search-product { padding: 0.5rem 0.75rem; cursor: pointer; }
+.search-product:hover { background-color: var(--color-bg); }

@@ -6,7 +6,11 @@
 <p class="error">{{ error }}</p>
 {% endif %}
 <form method="POST" action="/waste">
-    <label>Product: <input type="text" name="product_name" required></label><br>
+    <div class="search-box">
+        <input type="text" id="waste-search" name="product_name" placeholder="Search products..." autocomplete="off" required>
+        <ul id="waste-results" class="search-waste"></ul>
+    </div>
+    <br>
     <label>Amount wasted: <input type="number" step=any name="quantity_left" required></label><br>
     <button type="submit">Log waste</button>
 </form>
@@ -32,4 +36,12 @@
 {% else %}
 <p>No waste logged yet</p>
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const wasteNames = {{ product_name | tojson }};
+    const wasteInput = document.getElementById("waste-search")
+    setupLiveSearch("waste-search", "waste-results", wasteNames, function (name) { wasteInput.value = name;});
+</script>
 {% endblock %}

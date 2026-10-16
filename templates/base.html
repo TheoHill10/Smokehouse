@@ -8,17 +8,20 @@
     <div class="layout">
         <nav class="sidebar">
             <div class="brand">Smokehouse</div>
-            <a href="/">Dashboard</a>
-            <a href="/stock">Stock</a>
-            <a href="/recipes">Recipes</a>
-            <a href="/production">Production</a>
-            <a href="/waste">Waste</a>
+            <a href="/" class="{{ 'active' if request.path == '/' else '' }}">Dashboard</a>
+            <a href="/stock" class="{{ 'active' if request.path == '/stock' else '' }}">Stock</a>
+            <a href="/recipes" class="{{ 'active' if request.path == '/recipes' else '' }}">Recipes</a>
+            <a href="/production" class="{{ 'active' if request.path == '/production' else '' }}">Production</a>
+            <a href="/waste" class="{{ 'active' if request.path == '/waste' else '' }}">Waste</a>
+            <a href="/costings" class="{{ 'active' if request.path == '/costings' else '' }}">Costings</a>
         </nav>
         <div class="main">
             <div class="content">
                 {% block content %}{% endblock %}
             </div>
         </div>
-    </div>    
+    </div> 
+    <script src="{{ url_for ('static', filename='script.js') }}"></script>
+    {% block scripts %}{% endblock %}   
     </body>
 </html>

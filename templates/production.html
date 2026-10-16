@@ -4,16 +4,24 @@
 {% if error %}
 <p class="error">{{ error }}</p>
 {% endif %}
+
 <form method="POST" action="/production">
-    <label>Product: 
-        <select name="product_name">
-            {% for name in products %}
-            <option value="{{ name }}">{{ name }}</option>
-            {% endfor %}
-        </select>
+    <label for="product-search">Product:</label>
+    <div class="search-box">
+        <input type="text" id="product-search" name="product_name" placeholder="Search products..." autocomplete="off" required>
+        <ul id="product-results" class="search-products"></ul>
+    </div>
     </label><br>
     <label>Amount: <input type="number" step=any name="amount" required></label><br>
     <button type="submit">Log production</button>
 </form>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const productNames = {{ product_name | tojson }};
+    const productInput = document.getElementById("product-search")
+    setupLiveSearch("product-search", "product-results", productNames, function (name) { productInput.value = name;});
+</script>
 {% endblock %}

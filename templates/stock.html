@@ -4,11 +4,21 @@
 {% if error %}
 <p class="error">{{ error }}</p>
 {% endif %}
-<table border="1">
-    <tr><th>Ingredient</th><th>Quantity</th></tr>
-    {% for ingredient, quantity in stock.items() %}
-    <tr><td>{{ ingredient }}</td><td>{{ quantity | round(2) }}</td></tr>
-    {% endfor %}
+
+<div class="search-box">
+    <input type="text" id="stock-search" placeholder="Search stock..." autocomplete="off">
+</div>
+
+
+<table id="stock-table">
+    <thead>
+        <tr><th>Ingredient</th><th>Quantity</th></tr>
+    </thead>
+    <tbody>
+        {% for ingredient, quantity in stock.items() %}
+        <tr><td>{{ ingredient }}</td><td>{{ quantity | round(2) }}</td></tr>
+        {% endfor %}
+    </tbody>
 </table>
 
 <h1>Reorder Check</h1>
@@ -38,4 +48,10 @@
     <button type="submit">Add to Stock</button>
 </form>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    setupTableFilter("stock-search", "stock-table")
+</script>
 {% endblock %}

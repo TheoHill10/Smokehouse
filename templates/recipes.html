@@ -4,27 +4,35 @@
 {% if error %}
 <p class="error">{{ error }}</p>
 {% endif %}
-<form method="GET" action="/recipes">
-    <input type="text" name="search" placeholder="Search recipes..." value="{{ search }}">
-    <button type="submit">Search</button>
-</form>
 
-{% if recipes %}
-<ul>
-    {% for name in recipes %}
-    <li class="recipe-card"><a href="/recipes/{{ name }}">{{ name }} </a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No recipe exist yet</p>
-{% endif %}
+<div class="search-box">
+    <input type="text" id="recipe-search" placeholder="Search recipes..." autocomplete="off">
+    <ul id="recipe-results" class="search-results"></ul>
+</div>
+
+
+<h2>Recently searched</h2>
+<ul id="recent-recipes"></ul>
+
 
 <h2>Add recipe</h2>
 <form method="POST" action="/recipes">
     <label>Recipe name: <input type="text" name="recipe_name" required></label><br>
-    <label>Ingredient (one per line, format: ingredient, quantity, unit): 
-        <textarea name="ingredient_text" rows="6" cols="40" placeholder="Strong White Flour, 10, kg&#10;Water, 2, 1" required></textarea>
+    <label>Ingredients (one per line, format: ingredient, quantity, unit):<br>
+        <textarea name="ingredient_text" rows="6" cols="40" placeholder="Strong White Flour, 10, kg&#10;Water, 2, l" required></textarea>
     </label><br>
     <button type="submit">Add recipe</button>
 </form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const recipeNames = {{ recipe_names | tojson }};
+
+    setupLiveSearch("recipe-search", "recipe-results", recipeNames, function (name) {
+        window.location.href = "/recipes/" + encodeURIComponent(name);
+    });
+
+    showRecent("recent-recipes", recipeNames);
+</script>
 {% endblock %}

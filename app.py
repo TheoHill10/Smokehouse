@@ -74,15 +74,15 @@ def production_log():
         except ValueError:
             error = "Please enter a valid number amount"
     products = load_all_products("data/recipes.json")
-    return render_template("production.html", products=products, error=error)
+    return render_template("production.html", product_name=sorted(products), error=error)
 
 @app.route("/waste", methods=["GET", "POST"])
 def waste_log():
     error = None
+    products = load_all_products("data/recipes.json")
     if request.method == "POST":
         try:
             product_name = normalize(request.form["product_name"])
-            products = load_all_products("data/recipes.json")
             if product_name not in products:
                 raise KeyError
             quantity_left = float(request.form["quantity_left"])
@@ -103,7 +103,7 @@ def waste_log():
     today = str(datetime.date.today())
     summary_all_time = calculate_waste_summary(waste_log)
     summary_today = calculate_waste_summary(waste_log, start_date=today, end_date=today)
-    return render_template("waste.html", summary_today=summary_today, summary_all_time=summary_all_time, error=error)
+    return render_template("waste.html", product_name=sorted(products), summary_today=summary_today, summary_all_time=summary_all_time, error=error)
 
 @app.route("/recipes", methods=["GET", "POST"])
 def recipes_page():
@@ -128,14 +128,7 @@ def recipes_page():
             error = "Check your ingredient list is formatted as ingredient, quanity, unit. One per line"
     search = request.args.get("search","").lower()
     all_recipes = load_all_products("data/recipes.json")
-    if search:
-        recipes = {}
-        for name, product in all_recipes.items():
-            if search in name.lower():
-                recipes[name] = product
-    else:
-        recipes = all_recipes
-    return render_template("recipes.html", recipes=recipes, error=error, search=search)
+    return render_template("recipes.html", recipe_names=sorted(all_recipes), error=error, search=search)
 
 @app.route("/recipes/<name>")
 def recipe_details(name):
