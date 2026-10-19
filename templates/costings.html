@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Ingredients Costs</h1>
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+<div class="search-box">
+    <input type="text" id="costings-search" placeholder="Search ingredients..." autocomplete="off">
+</div>
+
+
+<table id="costings-table">
+    <thead>
+        <tr><th>Ingredient</th><th>Unit</th><th>Cost per unit</th></tr>
+    </thead>
+    <tbody>
+        {% for name, details in ingredients.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{% if details.unit %}{{ details.unit }}{% else %}not set{% endif %}</td>
+            <td>{% if details.cost_per_unit is none %}not set{% else %}£{{ '%.3f'|format(details.cost_per_unit) }}{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Update a cost</h2>
+<form method="POST" action="/costings">
+    <label for="cost-ingredient">Ingredient:</label>
+    <div class="search-box">
+        <input type="text" id="cost-ingredient" name="ingredient" placeholder="Search ingredients..." autocomplete="off" required>
+        <ul id="cost-results" class="search-results"></ul>
+    </div>
+    <label>Price paid (£): <input type="number" step="any" min="0" name="price" required></label><br>
+    <label>For quantity: <input type="number" step="any" min="0" name="quantity" required></label><br>
+    <label>Unit:
+        <select name="unit">
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+            <option value="l">l</option>
+            <option value="ml">ml</option>
+            <option value="each">each</option>
+        </select>
+    </label><br>
+    <button type="submit">Save cost</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const ingredientNames = {{ ingredient_names | tojson }};
+    const costInput = document.getElementById("cost-ingredient");
+
+    setupLiveSearch("cost-ingredient", "cost-results", ingredientNames, function (name) {
+        costInput.value = name;
+    });
+    setupTableFilter("costings-search", "costings-table");
+</script>
+{% endblock %}

@@ -6,6 +6,7 @@ from production_input import get_recipe_allergen, calculate_invoice_update, calc
 from waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production
 from utils import normalize, convert_to_base, recipe_to_text
 from dashboard_logic import find_highest, calculate_total_production
+from costings_logic import calculate_cost_update
 
 
 app = Flask(__name__)
@@ -113,6 +114,7 @@ def recipes_page():
             recipe_name = request.form["recipe_name"]
             ingredient_text = request.form["ingredient_text"]
             products = load_all_products("data/recipes.json")
+            minimum_stock = load_stock("data/minimum_stock.json")
             recipe = {}
             for line in ingredient_text.strip().split("\n"):
                 parts = line.split(",")
@@ -120,8 +122,9 @@ def recipes_page():
                 raw_quantity = float(parts[1])
                 unit = parts[2].strip()
                 recipe[ingredient] = convert_to_base(raw_quantity, unit)
-            updated_products = calculate_recipe_updated(recipe_name, recipe, products)
+            updated_products, updated_minimum_stock = calculate_recipe_updated(recipe_name, recipe, products, minimum_stock)
             save_all_products(updated_products, "data/recipes.json")
+            save_stock(updated_minimum_stock, "data/minimum_stock.json")
             log_change("Recipe added", f":New recipe added: {recipe_name} - {recipe}", "data/audit_log.json")
             return redirect(f"/recipes/{recipe_name}")
         except (IndexError, ValueError):
@@ -166,5 +169,27 @@ def update_recipes_page(name):
     prefill_text = recipe_to_text(current_recipe)
     return render_template("update_recipes.html", name=name, prefill_text=prefill_text, error=error)
 
+@app.route("/costings", methods=["GET", "POST"])
+def costings_page():
+    error = None
+    ingredients = load_stock("data/ingredients.json")
+    if request.method == 'POST':
+        try:
+            name = normalize(request.form["ingredient"])
+            if name not in ingredients:
+                raise ValueError(f"'{name}' isn't a known ingredient - pick one from the list")
+            price = float(request.form["price"])
+            quantitiy = float(request.form["quantity"])
+            unit = request.form["unit"]
+            ingredients = calculate_cost_update(ingredients, name, price, quantitiy, unit)
+            save_stock(ingredients, "data/ingredients.json")
+            record = ingredients[name]
+            log_change("cost_updated", f"{name} set to £{record['cost_per_unit']:.3f} per {record['unit']}", "data/audit_log.json")
+        except ValueError as e:
+            error = str(e)
+    return render_template("costings.html", ingredients=ingredients, ingredient_names =sorted(ingredients), error=error)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+

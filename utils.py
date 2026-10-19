@@ -8,6 +8,14 @@ def convert_to_base(quantity, unit):
         raise ValueError(f"Unkown unit: {unit}")
     return quantity*UNIT_CONVERSION[unit]
 
+
+UNIT_TYPES = {"kg": "kg", "g": "kg", "l": "l", "ml": "l", "each": "each"}
+def get_unit_type(unit):
+    unit = unit.lower().strip()
+    if unit not in UNIT_CONVERSION:
+        raise ValueError(f"Unkown unit: {unit}")
+    return UNIT_TYPES[unit]
+
 def find_allergens(ingredient_name, allergen_keywords):
     found = []
     name_lower = ingredient_name.lower()

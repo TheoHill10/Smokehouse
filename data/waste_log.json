@@ -76,5 +76,11 @@
         "quantity_made": 30.0,
         "quantity_left": 2.0,
         "date": "2026-10-10"
+    },
+    {
+        "product_name": "Pork Pie",
+        "quantity_made": 30.0,
+        "quantity_left": 4.0,
+        "date": "2026-10-18"
     }
 ]

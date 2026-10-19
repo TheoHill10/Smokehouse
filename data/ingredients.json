@@ -1,0 +1,66 @@
+{
+    "Water": {
+        "unit": "kg",
+        "cost_per_unit": 0
+    },
+    "Salt": {
+        "unit": "kg",
+        "cost_per_unit": 1
+    },
+    "Butter": {
+        "unit": "kg",
+        "cost_per_unit": 4.6
+    },
+    "Egg": {
+        "unit": "each",
+        "cost_per_unit": 0.22
+    },
+    "Lard": {
+        "unit": "kg",
+        "cost_per_unit": 1.92
+    },
+    "Gelatine": {
+        "unit": "kg",
+        "cost_per_unit": 16.29
+    },
+    "Pork Pie Meat": {
+        "unit": "kg",
+        "cost_per_unit": 5.5
+    },
+    "Baking Soda": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Bananas": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Chicken Stock": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Chocolate Chips": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Green Label Flour": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Milk": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Peanut Butter": {
+        "unit": null,
+        "cost_per_unit": null
+    },
+    "Sugar": {
+        "unit": "kg",
+        "cost_per_unit": 2.0
+    },
+    "Vanilla Extract": {
+        "unit": null,
+        "cost_per_unit": null
+    }
+}

@@ -3,7 +3,7 @@
 <h1>{{ name }}</h1>
 <ul>
     {% for ingredient, quantity in current_recipe.items() %}
-    <li>{{ ingredient }}: {{quantity}}</li>
+    <li>{{ ingredient }}: {{quantity | round(5) }}</li>
     {% endfor %}
 </ul>
 
