@@ -240,3 +240,18 @@ button:hover {
 .search-waste:empty { display: none; }
 .search-product { padding: 0.5rem 0.75rem; cursor: pointer; }
 .search-product:hover { background-color: var(--color-bg); }
+
+#update_button{
+    background-color: white;
+    border: 1px solid var(--color-border);
+    padding: var(--spacing);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+}
+
+#update_button:hover{
+    background-color: var(--color-bg);
+    border-color: var(--color-primary);
+}

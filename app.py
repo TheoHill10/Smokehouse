@@ -3,10 +3,10 @@ import datetime
 from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products, load_production_log
 from stock_logic import check_reorder_needed
 from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry
-from waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production
+from waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production, calculate_todays_unit_values
 from utils import normalize, convert_to_base, recipe_to_text
 from dashboard_logic import find_highest, calculate_total_production
-from costings_logic import calculate_cost_update
+from costings_logic import calculate_cost_update, build_margin_table, calculate_price_update, calculate_recipe_cost
 
 
 app = Flask(__name__)
@@ -65,9 +65,14 @@ def production_log():
             stock = load_stock("data/stock.json")
             product_object = products[product_name]
             ingredients_used, updated_stock = calculate_production_update(product_object, amount, stock)
-            save_stock(updated_stock, "data/stock.json")
+            registry = load_stock("data/ingredients.json")
+            prices = load_stock("data/prices.json")
+            recipe = product_object.recipe_history[-1].ingredients
+            unit_cost, missing_costs = calculate_recipe_cost(recipe, registry)
+            unit_price = prices.get(product_name)
             raw_production_log = load_stock("data/production_log.json")
-            updated_production_log = calculate_production_log_entry(product_name, amount, raw_production_log)
+            updated_production_log = calculate_production_log_entry(product_name, amount, raw_production_log, unit_cost=unit_cost, unit_price=unit_price, missing_costs=missing_costs)
+            save_stock(updated_stock, "data/stock.json")
             save_stock(updated_production_log, "data/production_log.json")
             log_change("production_logged", f"{amount} x {product_name} made, stock updated", "data/audit_log.json")
         except KeyError:
@@ -92,8 +97,9 @@ def waste_log():
             if not found: 
                 error = "No production logged for this product today - log production first"
             else:
+                unit_cost, unit_price = calculate_todays_unit_values(product_name, production_log)
                 raw_waste_log = load_stock("data/waste_log.json")
-                updated_waste_log = calculate_waste_update(product_name, todays_production, quantity_left, raw_waste_log)
+                updated_waste_log = calculate_waste_update(product_name, todays_production, quantity_left, raw_waste_log, unit_cost=unit_cost, unit_price=unit_price)
                 save_stock(updated_waste_log, "data/waste_log.json")
                 log_change("waste_logged", f"{quantity_left} x {product_name} wasted out of {todays_production} made", "data/audit_log.json")
         except KeyError:
@@ -123,8 +129,16 @@ def recipes_page():
                 unit = parts[2].strip()
                 recipe[ingredient] = convert_to_base(raw_quantity, unit)
             updated_products, updated_minimum_stock = calculate_recipe_updated(recipe_name, recipe, products, minimum_stock)
+            price_text = request.form["price"].strip()
+            updated_prices = None
+            if price_text:
+                price = float(price_text)
+                prices = load_stock("data/prices.json")
+                updated_prices = calculate_price_update(prices, recipe_name, price)
             save_all_products(updated_products, "data/recipes.json")
             save_stock(updated_minimum_stock, "data/minimum_stock.json")
+            if updated_prices is not None:
+                save_stock(updated_prices, "data/prices.json")
             log_change("Recipe added", f":New recipe added: {recipe_name} - {recipe}", "data/audit_log.json")
             return redirect(f"/recipes/{recipe_name}")
         except (IndexError, ValueError):
@@ -137,16 +151,19 @@ def recipes_page():
 def recipe_details(name):
     recipes = load_all_products("data/recipes.json")
     allergens = load_stock("data/allergens_keywords.json")
+    prices = load_stock("data/prices.json")
+    price=prices.get(name)
     product_object = recipes[name]
     current_recipe = product_object.recipe_history[-1].ingredients
     allergens = get_recipe_allergen(current_recipe, allergens)
-    return render_template("recipe_details.html", name=name, current_recipe=current_recipe, allergens=allergens)
+    return render_template("recipe_details.html", name=name, current_recipe=current_recipe, allergens=allergens, price=price)
 
 @app.route("/recipes/<name>/update", methods=["GET", "POST"])
 def update_recipes_page(name):
     error = None
     products = load_all_products("data/recipes.json")
     product_object = products[name]
+    prices = load_stock('data/prices.json')
     if request.method == "POST":
         try:
             ingredient_text = request.form["ingredient_text"]
@@ -157,17 +174,25 @@ def update_recipes_page(name):
                 raw_quantity = float(parts[1])
                 unit = parts[2].strip()
                 recipe[ingredient] = convert_to_base(raw_quantity, unit)
-            date = str(datetime.date.today())
-            product_object.update_recipe(recipe, date)
-            products[name] = product_object
-            save_all_products(products, "data/recipes.json")
+            current_recipe = product_object.recipe_history[-1].ingredients
+            if recipe != current_recipe:
+                date = str(datetime.date.today())
+                product_object.update_recipe(recipe, date)
+                products[name] = product_object
+                save_all_products(products, "data/recipes.json")
+            price_text = request.form['price'].strip()
+            if price_text:
+                price = float(price_text)
+                updated_prices = calculate_price_update(prices, name, price)
+                save_stock(updated_prices, "data/prices.json")
+                prices = updated_prices
             log_change("Recipe added", f":Recipe updated: {name} recipe updated - {recipe}", "data/audit_log.json")
             return redirect(f"/recipes/{name}")
         except (IndexError, ValueError):
             error = "Check your ingredient list is formatted as ingredient, quanity, unit. One per line"
     current_recipe = product_object.recipe_history[-1].ingredients
     prefill_text = recipe_to_text(current_recipe)
-    return render_template("update_recipes.html", name=name, prefill_text=prefill_text, error=error)
+    return render_template("update_recipes.html", name=name, prefill_text=prefill_text, price=prices.get(name), error=error)
 
 @app.route("/costings", methods=["GET", "POST"])
 def costings_page():
@@ -187,9 +212,11 @@ def costings_page():
             log_change("cost_updated", f"{name} set to £{record['cost_per_unit']:.3f} per {record['unit']}", "data/audit_log.json")
         except ValueError as e:
             error = str(e)
-    return render_template("costings.html", ingredients=ingredients, ingredient_names =sorted(ingredients), error=error)
+    products = load_all_products('data/recipes.json')
+    prices = load_stock('data/prices.json')
+    margins = build_margin_table(products, ingredients, prices)
+    return render_template("costings.html", ingredients=ingredients, ingredient_names =sorted(ingredients), margins=margins, error=error)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-

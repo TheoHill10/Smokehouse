@@ -1,3 +1,23 @@
 [
-    
+    {
+        "product_name": "Sourdough",
+        "quantity_made": 30.0,
+        "date": "2026-10-21"
+    },
+    {
+        "product_name": "Pork Pie",
+        "quantity_made": 20.0,
+        "date": "2026-10-22",
+        "unit_cost": 0.5959862119999999,
+        "unit_price": 3.5,
+        "missing_costs": []
+    },
+    {
+        "product_name": "Pork Pie",
+        "quantity_made": 20.0,
+        "date": "2026-10-22",
+        "unit_cost": 0.5325586309999999,
+        "unit_price": 3.5,
+        "missing_costs": []
+    }
 ]

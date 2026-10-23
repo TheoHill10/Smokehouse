@@ -147,9 +147,9 @@ def view_recipe_details():
     else:
         print("No allegens flagged")
 
-def calculate_production_log_entry(product_name, amount, production_log):
+def calculate_production_log_entry(product_name, amount, production_log, unit_cost=None, unit_price=None, missing_costs=None):
     date = str(datetime.date.today())
-    new_entry = ProductionEntry(product_name, amount, date)
+    new_entry = ProductionEntry(product_name, amount, date, unit_cost=unit_cost, unit_price=unit_price, missing_costs=missing_costs)
     updated_log = list(production_log)
     updated_log.append(new_entry.to_dict())
     return updated_log

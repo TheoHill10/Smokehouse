@@ -21,6 +21,8 @@
     </tbody>
 </table>
 
+<br>
+
 <h1>Reorder Check</h1>
 {% if  reorder %}
 <ul> 
@@ -32,7 +34,9 @@
 <p>Nothing needs to be reordered</p>
 {% endif %}
 
-<h2>Add Invoice</h2>
+<br>
+
+<h1>Add Invoice</h1>
 <form method="POST" action="/stock">
     <label>Ingredient: <input type="text" name="ingredient" required></label><br>
     <label>Quantity: <input type="number" step="any" name="quantity" required></label><br>

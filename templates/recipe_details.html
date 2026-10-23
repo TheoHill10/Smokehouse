@@ -18,7 +18,13 @@
 <p>No allergens flagged.</p>
 {% endif %}
 
-<a href="/recipes/{{ name }}/update">Update this recipe</a>
+<br>
+
+<p>Selling price: {% if price is none %}not set{% else %}£{{ '%.2f'|format(price) }}{% endif %}</p>
+
+<br>
+
+<a href="/recipes/{{ name }}/update" id="update_button">Update this recipe</a>
 {% block scripts %}
 <script>
     saveRecent({{ name | tojson }});

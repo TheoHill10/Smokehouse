@@ -25,6 +25,8 @@
     </tbody>
 </table>
 
+<br>
+
 <h2>Update a cost</h2>
 <form method="POST" action="/costings">
     <label for="cost-ingredient">Ingredient:</label>
@@ -45,6 +47,28 @@
     </label><br>
     <button type="submit">Save cost</button>
 </form>
+
+<br>
+
+<h2>Product margins</h2>
+<table>
+    <thead>
+        <tr><th>Product</th><th>Selling price</th><th>Cost to make</th><th>Margin</th><th>Margin %</th><th>Missing costs</th></tr>
+    </thead>
+    <tbody>
+        {% for name, row in margins.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{% if row.price is none %}no price{% else %}£{{ '%.2f'|format(row.price) }}{% endif %}</td>
+            <td>£{{ '%.2f'|format(row.cost) }}{% if row.missing %} (incomplete){% endif %}</td>
+            <td>{% if row.margin is none %}-{% else %}£{{ '%.2f'|format(row.margin) }}{% endif %}</td>
+            <td>{% if row.margin_percent is none %}-{% else %}{{ '%.1f'|format(row.margin_percent) }}%{% endif %}</td>
+            <td>{{ row.missing|join(', ') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
 
 {% block scripts %}

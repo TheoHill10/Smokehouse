@@ -14,6 +14,7 @@
 <h2>Recently searched</h2>
 <ul id="recent-recipes"></ul>
 
+<br>
 
 <h2>Add recipe</h2>
 <form method="POST" action="/recipes">
@@ -21,6 +22,7 @@
     <label>Ingredients (one per line, format: ingredient, quantity, unit):<br>
         <textarea name="ingredient_text" rows="6" cols="40" placeholder="Strong White Flour, 10, kg&#10;Water, 2, l" required></textarea>
     </label><br>
+    <label>Selling price (£): <input type="number" step="any" min="0" name="price"></label><br>
     <button type="submit">Add recipe</button>
 </form>
 {% endblock %}

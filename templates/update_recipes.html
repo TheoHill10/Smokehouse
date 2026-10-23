@@ -6,6 +6,9 @@
     <label>Ingredients (one per line, format: ingredient, quantity, unit):<br>
         <textarea name="ingredient_text" rows="8" cols="40" required>{{ prefill_text }}</textarea>
     </label><br>
+    <label>Update price: (£)
+        <input type="number" step="any" min="0" name="price" {% if price is not none %}value="{{ '%.2f'|format(price) }}"{% endif %}>
+    </label>
     <button type="submit">Save changes</button>
 </form>
 {% endblock %}

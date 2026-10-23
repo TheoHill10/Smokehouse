@@ -5,7 +5,7 @@
     },
     "Salt": {
         "unit": "kg",
-        "cost_per_unit": 1
+        "cost_per_unit": 0.484
     },
     "Butter": {
         "unit": "kg",
@@ -19,11 +19,11 @@
         "unit": "kg",
         "cost_per_unit": 1.92
     },
-    "Gelatine": {
+    "Powder Gelatine": {
         "unit": "kg",
         "cost_per_unit": 16.29
     },
-    "Pork Pie Meat": {
+    "Pork Meat": {
         "unit": "kg",
         "cost_per_unit": 5.5
     },
@@ -36,16 +36,16 @@
         "cost_per_unit": null
     },
     "Chicken Stock": {
-        "unit": null,
-        "cost_per_unit": null
+        "unit": "kg",
+        "cost_per_unit": 21.26
     },
     "Chocolate Chips": {
-        "unit": null,
-        "cost_per_unit": null
+        "unit": "kg",
+        "cost_per_unit": 1.0
     },
     "Green Label Flour": {
-        "unit": null,
-        "cost_per_unit": null
+        "unit": "kg",
+        "cost_per_unit": 0.6562
     },
     "Milk": {
         "unit": null,
@@ -57,10 +57,70 @@
     },
     "Sugar": {
         "unit": "kg",
-        "cost_per_unit": 2.0
+        "cost_per_unit": 0.77
     },
     "Vanilla Extract": {
         "unit": null,
         "cost_per_unit": null
+    },
+    "White Spelt Flour": {
+        "unit": "kg",
+        "cost_per_unit": 1.165625
+    },
+    "Wholemeal Flour": {
+        "unit": "kg",
+        "cost_per_unit": 1.1346875
+    },
+    "Wholemeal Spelt Flour": {
+        "unit": "kg",
+        "cost_per_unit": 1.0825
+    },
+    "Culinary Flour": {
+        "unit": "kg",
+        "cost_per_unit": 0.609
+    },
+    "Dark Chocolate": {
+        "unit": "kg",
+        "cost_per_unit": 12.14
+    },
+    "White Chocolate": {
+        "unit": "kg",
+        "cost_per_unit": 13.22
+    },
+    "Milk Chocolate": {
+        "unit": "kg",
+        "cost_per_unit": 13.5
+    },
+    "Cocoa": {
+        "unit": "kg",
+        "cost_per_unit": 36.63
+    },
+    "Mini Eggs": {
+        "unit": "kg",
+        "cost_per_unit": 9.33
+    },
+    "Biscuit Crumb": {
+        "unit": "kg",
+        "cost_per_unit": 5.53
+    },
+    "Whipping Cream": {
+        "unit": "kg",
+        "cost_per_unit": 4.67
+    },
+    "Cream Cheese": {
+        "unit": "kg",
+        "cost_per_unit": 4.62
+    },
+    "Gelatine": {
+        "unit": "kg",
+        "cost_per_unit": 0.07
+    },
+    "Mango Puree": {
+        "unit": "kg",
+        "cost_per_unit": 7.01
+    },
+    "Passionfruit Puree": {
+        "unit": "kg",
+        "cost_per_unit": 8.63
     }
 }

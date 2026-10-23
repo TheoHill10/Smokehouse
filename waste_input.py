@@ -4,9 +4,9 @@ from storage import load_waste_log, log_change
 import datetime
 import json
 
-def calculate_waste_update(product_name, quantity_made, quantity_left, waste_log):
+def calculate_waste_update(product_name, quantity_made, quantity_left, waste_log, unit_cost=None, unit_price=None):
     date = str(datetime.date.today())  
-    new_entry = WasteEntry(product_name, quantity_made, quantity_left, date)
+    new_entry = WasteEntry(product_name, quantity_made, quantity_left, date, unit_cost=unit_cost, unit_price=unit_price)
     updated_waste_log = list(waste_log)
     updated_waste_log.append(new_entry.to_dict())
     return updated_waste_log
@@ -63,3 +63,21 @@ def calculate_todays_production(product_name, production_log, date=None):
             total += entry.quantity_made
             found = True
     return total, found
+
+def calculate_todays_unit_values(product_name, production_log, date=None):
+    if date is None:
+        date = str(datetime.date.today())
+    cost_total = cost_quantity = 0
+    price_total = price_quantity = 0
+    for entry in production_log:
+        if entry.product_name != product_name or entry.date != date:
+            continue
+        if entry.unit_cost is not None:
+            cost_total += entry.quantity_made*entry.unit_cost
+            cost_quantity += entry.quantity_made
+        if entry.unit_price is not None:
+            price_total += entry.quantity_made*entry.unit_price
+            price_quantity += entry.quantity_made
+    unit_cost = cost_total/cost_quantity if cost_quantity > 0 else None
+    unit_price = price_total/price_quantity if price_quantity > 0 else None
+    return unit_cost, unit_price

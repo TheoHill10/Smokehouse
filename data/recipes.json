@@ -34,6 +34,83 @@
                     "Chicken Stock": 0.000367
                 },
                 "date_created": "2026-10-18"
+            },
+            {
+                "ingredients": {
+                    "Green Label Flour": 0.050995,
+                    "Lard": 0.01585,
+                    "Salt": 0.001103,
+                    "Water": 0.058749,
+                    "Pork Meat": 0.075,
+                    "Powder Gelatine": 0.002936,
+                    "Chicken Stock": 0.000367
+                },
+                "date_created": "2026-10-21"
+            }
+        ]
+    },
+    "Sourdough": {
+        "name": "Sourdough",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Green Label Flour": 0.9500000000000001,
+                    "White Spelt Flour": 0.1,
+                    "Wholemeal Spelt Flour": 0.1,
+                    "Wholemeal Flour": 0.1,
+                    "Water": 0.8,
+                    "Salt": 0.01
+                },
+                "date_created": "2026-10-21"
+            }
+        ]
+    },
+    "Mini Egg Brownie": {
+        "name": "Mini Egg Brownie",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Dark Chocolate": 1.7,
+                    "Butter": 1.5,
+                    "Egg": 20.0,
+                    "Culinary Flour": 0.68,
+                    "Cocoa": 0.32,
+                    "White Chocolate": 0.3,
+                    "Milk Chocolate": 0.3,
+                    "Mini Eggs": 1.0
+                },
+                "date_created": "2026-10-22"
+            },
+            {
+                "ingredients": {
+                    "Dark Chocolate": 0.02361,
+                    "Butter": 0.020829999999999998,
+                    "Egg": 0.278,
+                    "Culinary Flour": 0.00944,
+                    "Cocoa": 0.00444,
+                    "White Chocolate": 0.00417,
+                    "Milk Chocolate": 0.00417,
+                    "Mini Eggs": 0.013890000000000001
+                },
+                "date_created": "2026-10-22"
+            }
+        ]
+    },
+    "Mango & Passionfruit Cheesecake S": {
+        "name": "Mango & Passionfruit Cheesecake S",
+        "recipe_history": [
+            {
+                "ingredients": {
+                    "Biscuit Crumb": 0.11,
+                    "Butter": 0.04,
+                    "Whipping Cream": 0.162,
+                    "Cream Cheese": 0.139,
+                    "Sugar": 0.093,
+                    "Gelatine": 0.003,
+                    "Mango Puree": 0.138,
+                    "Passionfruit Puree": 0.138
+                },
+                "date_created": "2026-10-22"
             }
         ]
     }

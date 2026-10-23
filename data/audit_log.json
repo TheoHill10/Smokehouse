@@ -8,5 +8,145 @@
         "action": "cost_updated",
         "details": "Pork Meat set to \u00a35.500 per kg",
         "date": "2026-10-18"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Green Label Flour set to \u00a31.900 per kg",
+        "date": "2026-10-20"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Chicken Stock set to \u00a321.260 per kg",
+        "date": "2026-10-20"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":Recipe updated: Pork Pie recipe updated - {'Green Label Flour': 0.050995, 'Lard': 0.01585, 'Salt': 0.001103, 'Water': 0.058749, 'Pork Meat': 0.075, 'Gelatine': 0.002936, 'Chicken Stock': 0.000367}",
+        "date": "2026-10-20"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Salt set to \u00a30.484 per kg",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Sourdough - {'Green Label Flour': 0.9500000000000001, 'White Spelt Flour': 0.1, 'Wholemeal Spelt Flour': 0.1, 'Wholemeal Flour': 0.1, 'Water': 0.8, 'Salt': 0.01}",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'White Spelt Flour': 16.0}",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Wholemeal Spelt Flour': 16.0}",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Wholemeal Flour': 16.0}",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Sourdough made, stock updated",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "cost_updated",
+        "details": "White Spelt Flour set to \u00a31.083 per kg",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Wholemeal Spelt Flour set to \u00a31.083 per kg",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "cost_updated",
+        "details": "White Spelt Flour set to \u00a31.166 per kg",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Wholemeal Flour set to \u00a31.135 per kg",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Sugar set to \u00a30.770 per kg",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":Recipe updated: Pork Pie recipe updated - {'Green Label Flour': 0.050995, 'Lard': 0.01585, 'Salt': 0.001103, 'Water': 0.058749, 'Pork Meat': 0.075, 'Powder Gelatine': 0.002936, 'Chicken Stock': 0.000367}",
+        "date": "2026-10-21"
+    },
+    {
+        "action": "production_logged",
+        "details": "20.0 x Pork Pie made, stock updated",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Mini Egg Brownie - {'Dark Chocolate': 1.7, 'Butter': 1.5, 'Egg': 20.0, 'Culinary Flour': 0.68, 'Cocoa': 0.32, 'White Chocolate': 0.3, 'Milk Chocolate': 0.3, 'Mini Eggs': 1.0}",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":Recipe updated: Mini Egg Brownie recipe updated - {'Dark Chocolate': 0.02361, 'Butter': 0.020829999999999998, 'Egg': 0.278, 'Culinary Flour': 0.00944, 'Cocoa': 0.00444, 'White Chocolate': 0.00417, 'Milk Chocolate': 0.00417, 'Mini Eggs': 0.013890000000000001}",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Mango & Passionfruit Cheesecake S - {'Biscuit Crumb': 0.11, 'Butter': 0.04, 'Whipping Cream': 0.162, 'Cream Cheese': 0.139, 'Sugar': 0.093, 'Gelatine': 0.003, 'Mango Puree': 0.138, 'Passionfruit Puree': 0.138}",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "invoice_logged",
+        "details": "Invoice processed: {'Salt': 30.0}",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "production_logged",
+        "details": "20.0 x Pork Pie made, stock updated",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "waste_logged",
+        "details": "3.0 x Pork Pie wasted out of 40.0 made",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "cost_updated",
+        "details": "Chocolate Chips set to \u00a31.000 per kg",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":Recipe updated: Sourdough recipe updated - {'Green Label Flour': 0.9500000000000001, 'White Spelt Flour': 0.1, 'Wholemeal Spelt Flour': 0.1, 'Wholemeal Flour': 0.1, 'Water': 0.8, 'Salt': 0.01}",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Pork Pie wasted out of 40.0 made",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "waste_logged",
+        "details": "1.0 x Pork Pie wasted out of 40.0 made",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Pork Pie wasted out of 40.0 made",
+        "date": "2026-10-22"
+    },
+    {
+        "action": "waste_logged",
+        "details": "3.0 x Pork Pie wasted out of 40.0 made",
+        "date": "2026-10-22"
     }
 ]
