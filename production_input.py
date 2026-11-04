@@ -153,3 +153,13 @@ def calculate_production_log_entry(product_name, amount, production_log, unit_co
     updated_log = list(production_log)
     updated_log.append(new_entry.to_dict())
     return updated_log
+
+def recipe_scaling(name, amount):
+    products = load_all_products('data/recipes.json')
+    recipe = products[name]
+    current_recipe = recipe.recipe_history[-1].ingredients
+    scaled_recipe = {}
+    for ingredient, quantity in current_recipe.items():
+        new_amount = quantity*amount
+        scaled_recipe[ingredient] = new_amount
+    return scaled_recipe

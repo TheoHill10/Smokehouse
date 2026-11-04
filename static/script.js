@@ -36,7 +36,7 @@ function setupLiveSearch(inputId, resultsId, items, onSelect) {
 }
 
 const RECENT_KEY = "smokehouseRecentRecipes";
-const MAX_RECENT = 6;
+const MAX_RECENT = 3;
 
 function getRecent() {
     try {
@@ -57,7 +57,9 @@ function saveRecent(name) {
 
 function setupTableFilter(inputId, tableId) {
     const input = document.getElementById(inputId);
-    const rows = document.querySelectorAll("#" + tableId + " tbody tr");
+    const table = document.getElementById(tableId)
+    const rows = document.querySelectorAll("tbody tr");
+    const dropdown = table.closest("details")
 
     input.addEventListener("input", function () {
         const query = input.value.trim().toLowerCase();
@@ -65,6 +67,12 @@ function setupTableFilter(inputId, tableId) {
             const name = row.cells[0].textContent.toLowerCase();
             row.style.display = name.includes(query) ? "" : "none";
         });
+        if (query !== ""){
+            dropdown.open = true
+        } else {
+            dropdown.open = false
+        }
+
     });
 }
 
@@ -94,3 +102,22 @@ function showRecent(listId, validNames) {
         list.appendChild(item);
     });
 }
+
+const menu = document.getElementById("offcanvas-menu");
+const toggle = document.getElementById("menu-toggle");
+const close = document.getElementById("menu-close");
+const backdrop = document.getElementById("menu-backdrop");
+
+function openMenu() {
+    menu.classList.add("active");
+    backdrop.classList.add("active");
+}
+
+function closeMenu() {
+    menu.classList.remove("active");
+    backdrop.classList.remove("active");
+}
+
+toggle.addEventListener("click", openMenu);
+close.addEventListener("click", closeMenu);
+backdrop.addEventListener("click", closeMenu);

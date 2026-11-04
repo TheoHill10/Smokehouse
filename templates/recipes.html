@@ -16,7 +16,7 @@
 
 <br>
 
-<h2>Add recipe</h2>
+<!-- <h2>Add recipe</h2>
 <form method="POST" action="/recipes">
     <label>Recipe name: <input type="text" name="recipe_name" required></label><br>
     <label>Ingredients (one per line, format: ingredient, quantity, unit):<br>
@@ -24,17 +24,57 @@
     </label><br>
     <label>Selling price (£): <input type="number" step="any" min="0" name="price"></label><br>
     <button type="submit">Add recipe</button>
+</form> -->
+
+<h2>Add recipe</h2>
+<form method="POST" action="/recipes" id="recipe-form">
+    <label>Recipe name: <input type="text" name="recipe_name" required></label><br>
+    <label>Selling price (£): <input type="number" step="any" min="0" name="price"></label><br>
+
+    <h3 id="builder-heading">Ingredients (0)</h3>
+    <ul id="builder-list"></ul>
+
+    <div class="builder-entry">
+        <div class="search-box">
+            <input type="text" id="builder-name" placeholder="Ingredient" autocomplete="off">
+            <ul id="builder-results" class="search-results"></ul>
+        </div>
+        <input type="number" id="builder-quantity" step="any" placeholder="Quantity">
+        <select id="builder-unit">
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="ml">ml</option>
+            <option value="l">l</option>
+            <option value="each">each</option>
+        </select>
+        <button type="button" id="builder-add">Add ingredient</button>
+    </div>
+    <p id="builder-error" class="error" hidden></p>
+    <input type="hidden" name="ingredients_json" id="builder-json">
+    <button type="submit" id="builder-done">Done</button>
 </form>
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='recipe_builder.js') }}"></script>
 <script>
     const recipeNames = {{ recipe_names | tojson }};
 
     setupLiveSearch("recipe-search", "recipe-results", recipeNames, function (name) {
+        saveRecent(name)
         window.location.href = "/recipes/" + encodeURIComponent(name);
     });
 
     showRecent("recent-recipes", recipeNames);
+
+    const ingredientNames = {{ ingredient_names | tojson }};
+    const builderName = document.getElementById("builder-name");
+    const builderQuantity = document.getElementById("builder-quantity");
+
+    setupLiveSearch("builder-name", "builder-results", ingredientNames, function (name) {
+        builderName.value = name;
+        builderQuantity.focus();
+    });
+    setupRecipeBuilder([]);
 </script>
 {% endblock %}

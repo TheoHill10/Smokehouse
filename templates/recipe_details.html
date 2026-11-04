@@ -6,6 +6,7 @@
     <li>{{ ingredient }}: {{quantity | round(5) }}</li>
     {% endfor %}
 </ul>
+<p>Selling price: {% if price is none %}not set{% else %}£{{ '%.2f'|format(price) }}{% endif %}</p>
 
 <h2>Allergens</h2>
 {% if allergens %}
@@ -18,17 +19,22 @@
 <p>No allergens flagged.</p>
 {% endif %}
 
-<br>
 
-<p>Selling price: {% if price is none %}not set{% else %}£{{ '%.2f'|format(price) }}{% endif %}</p>
+<h3>Recipe scaling</h3>
+<form method="POST">
+    <label>How many do you want to make:
+        <input type="number" name="amount" step="1" min="1" placeholder="Quantity" required>
+    </label>
+    <button type="submit">Calculate</button>
+</form>
 
-<br>
 
 <a href="/recipes/{{ name }}/update" id="update_button">Update this recipe</a>
+
+{% endblock %}
+
 {% block scripts %}
 <script>
     saveRecent({{ name | tojson }});
 </script>
-{% endblock %}
-
 {% endblock %}

@@ -3,18 +3,39 @@
     <head>
         <title>Smokehouse Stock System</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
     <div class="layout">
         <nav class="sidebar">
-            <div class="brand">Smokehouse</div>
+            <button id="menu-toggle" class="menu-button"> ☰ </button>
             <a href="/" class="{{ 'active' if request.path == '/' else '' }}">Dashboard</a>
             <a href="/stock" class="{{ 'active' if request.path == '/stock' else '' }}">Stock</a>
             <a href="/recipes" class="{{ 'active' if request.path == '/recipes' else '' }}">Recipes</a>
             <a href="/production" class="{{ 'active' if request.path == '/production' else '' }}">Production</a>
             <a href="/waste" class="{{ 'active' if request.path == '/waste' else '' }}">Waste</a>
             <a href="/costings" class="{{ 'active' if request.path == '/costings' else '' }}">Costings</a>
+            <div class="brand">Smokehouse</div>
         </nav>
+        
+        <div id="menu-backdrop" class="backdrop"></div>
+
+        <aside id="offcanvas-menu" class="offcanvas">
+
+            <div class="offcanvas-header">
+                <h2>Menu</h2>
+                <button id="menu-close">X</button>
+            </div>
+
+            <a href="/" class="{{ 'active' if request.path == '/' else '' }}">Dashboard</a>
+            <a href="/stock" class="{{ 'active' if request.path == '/stock' else '' }}">Stock</a>
+            <a href="/recipes" class="{{ 'active' if request.path == '/recipes' else '' }}">Recipes</a>
+            <a href="/production" class="{{ 'active' if request.path == '/production' else '' }}">Production</a>
+            <a href="/waste" class="{{ 'active' if request.path == '/waste' else '' }}">Waste</a>
+            <a href="/costings" class="{{ 'active' if request.path == '/costings' else '' }}">Costings</a>
+
+        </aside>
+
         <div class="main">
             <div class="content">
                 {% block content %}{% endblock %}

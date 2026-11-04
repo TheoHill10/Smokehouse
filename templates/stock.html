@@ -9,18 +9,23 @@
     <input type="text" id="stock-search" placeholder="Search stock..." autocomplete="off">
 </div>
 
+<details class="stock-dropdown">
+    <summary>
+        <table class="stock-heading">
+            <thead>
+                <tr><th>Ingredient</th><th>Quantity</th></tr>
+            </thead>
+        </table>
+    </summary>
 
-<table id="stock-table">
-    <thead>
-        <tr><th>Ingredient</th><th>Quantity</th></tr>
-    </thead>
-    <tbody>
-        {% for ingredient, quantity in stock.items() %}
-        <tr><td>{{ ingredient }}</td><td>{{ quantity | round(2) }}</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+    <table id="stock-table">
+        <tbody>
+            {% for ingredient, quantity in stock.items() %}
+            <tr><td>{{ ingredient }}</td><td>{{ quantity | round(2) }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</details>
 <br>
 
 <h1>Reorder Check</h1>

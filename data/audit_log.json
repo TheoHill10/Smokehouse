@@ -148,5 +148,30 @@
         "action": "waste_logged",
         "details": "3.0 x Pork Pie wasted out of 40.0 made",
         "date": "2026-10-22"
+    },
+    {
+        "action": "Recipe added",
+        "details": ":New recipe added: Shortbread - {'Butter': 0.02}",
+        "date": "2026-11-03"
+    },
+    {
+        "action": "production_logged",
+        "details": "30.0 x Sourdough made, stock updated",
+        "date": "2026-11-03"
+    },
+    {
+        "action": "waste_logged",
+        "details": "2.0 x Sourdough wasted out of 30.0 made",
+        "date": "2026-11-03"
+    },
+    {
+        "action": "waste_logged",
+        "details": "1.0 x Sourdough wasted out of 30.0 made",
+        "date": "2026-11-03"
+    },
+    {
+        "action": "waste_logged",
+        "details": "1.0 x Sourdough wasted out of 30.0 made",
+        "date": "2026-11-03"
     }
 ]

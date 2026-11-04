@@ -14,5 +14,29 @@
         "date": "2026-10-22",
         "unit_cost": 0.5642724214999999,
         "unit_price": 3.5
+    },
+    {
+        "product_name": "Sourdough",
+        "quantity_made": 30.0,
+        "quantity_left": 2.0,
+        "date": "2026-11-03",
+        "unit_cost": 0.9665112499999999,
+        "unit_price": 4.5
+    },
+    {
+        "product_name": "Sourdough",
+        "quantity_made": 30.0,
+        "quantity_left": 1.0,
+        "date": "2026-11-03",
+        "unit_cost": 0.9665112499999999,
+        "unit_price": 4.5
+    },
+    {
+        "product_name": "Sourdough",
+        "quantity_made": 30.0,
+        "quantity_left": 1.0,
+        "date": "2026-11-03",
+        "unit_cost": 0.9665112499999999,
+        "unit_price": 4.5
     }
 ]

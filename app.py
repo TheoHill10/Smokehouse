@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request, redirect
 import datetime
+import json
+from flask import Flask, render_template, request, redirect
 from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products, load_production_log
 from stock_logic import check_reorder_needed
-from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry
+from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry, recipe_scaling
 from waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production, calculate_todays_unit_values
 from utils import normalize, convert_to_base, recipe_to_text
 from dashboard_logic import find_highest, calculate_total_production
-from costings_logic import calculate_cost_update, build_margin_table, calculate_price_update, calculate_recipe_cost
+from costings_logic import calculate_cost_update, build_margin_table, calculate_price_update, calculate_recipe_cost, register_ingredients
+from recipe_input import parse_ingredient_list
 
 
 app = Flask(__name__)
@@ -115,48 +117,56 @@ def waste_log():
 @app.route("/recipes", methods=["GET", "POST"])
 def recipes_page():
     error = None
+    registry = load_stock("data/ingredients.json")
     if request.method == "POST":
         try:
-            recipe_name = request.form["recipe_name"]
-            ingredient_text = request.form["ingredient_text"]
-            products = load_all_products("data/recipes.json")
-            minimum_stock = load_stock("data/minimum_stock.json")
-            recipe = {}
-            for line in ingredient_text.strip().split("\n"):
-                parts = line.split(",")
-                ingredient = normalize(parts[0])
-                raw_quantity = float(parts[1])
-                unit = parts[2].strip()
-                recipe[ingredient] = convert_to_base(raw_quantity, unit)
-            updated_products, updated_minimum_stock = calculate_recipe_updated(recipe_name, recipe, products, minimum_stock)
+            recipe_name = normalize(request.form["recipe_name"])
             price_text = request.form["price"].strip()
+            items = json.loads(request.form["ingredients_json"])
+            products = load_all_products("data/recipes.json")
+            if recipe_name in products: 
+                raise ValueError(f"{recipe_name} already exists - open it and use update recipe")
+            minimum_stock = load_stock("data/minimum_stock.json")
+            recipe, ingredient_unit = parse_ingredient_list(items)
+            updated_registry = register_ingredients(registry, ingredient_unit)
+            updated_products, updated_minimum_stock = calculate_recipe_updated(recipe_name, recipe, products, minimum_stock)
             updated_prices = None
-            if price_text:
+            if price_text != "":
                 price = float(price_text)
                 prices = load_stock("data/prices.json")
                 updated_prices = calculate_price_update(prices, recipe_name, price)
             save_all_products(updated_products, "data/recipes.json")
             save_stock(updated_minimum_stock, "data/minimum_stock.json")
+            save_stock(updated_registry, "data/ingredients.json")
             if updated_prices is not None:
                 save_stock(updated_prices, "data/prices.json")
             log_change("Recipe added", f":New recipe added: {recipe_name} - {recipe}", "data/audit_log.json")
             return redirect(f"/recipes/{recipe_name}")
-        except (IndexError, ValueError):
-            error = "Check your ingredient list is formatted as ingredient, quanity, unit. One per line"
+        except ValueError as e:
+            error = str(e)
     search = request.args.get("search","").lower()
     all_recipes = load_all_products("data/recipes.json")
-    return render_template("recipes.html", recipe_names=sorted(all_recipes), error=error, search=search)
+    return render_template("recipes.html", recipe_names=sorted(all_recipes), ingredient_names=sorted(registry), error=error, search=search)
 
-@app.route("/recipes/<name>")
+@app.route("/recipes/<name>", methods=["GET", "POST"])
 def recipe_details(name):
+    error = None
     recipes = load_all_products("data/recipes.json")
     allergens = load_stock("data/allergens_keywords.json")
     prices = load_stock("data/prices.json")
     price=prices.get(name)
     product_object = recipes[name]
     current_recipe = product_object.recipe_history[-1].ingredients
+    if request.method == "POST":
+        try:
+            amount = int(request.form["amount"])
+            if amount <= 0:
+                raise ValueError
+            current_recipe = recipe_scaling(name, amount)
+        except ValueError:
+            error = "Please enter a valid quantity greater than 0"    
     allergens = get_recipe_allergen(current_recipe, allergens)
-    return render_template("recipe_details.html", name=name, current_recipe=current_recipe, allergens=allergens, price=price)
+    return render_template("recipe_details.html", name=name, current_recipe=current_recipe, allergens=allergens, price=price, error=error)
 
 @app.route("/recipes/<name>/update", methods=["GET", "POST"])
 def update_recipes_page(name):

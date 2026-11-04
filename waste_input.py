@@ -30,13 +30,17 @@ def log_waste():
 def calculate_waste_summary(waste_log, start_date=None, end_date=None):
     total_made = {}
     total_wasted = {}
+    production_counted = set()
     for entry in waste_log:
         if start_date and entry.date < start_date:
             continue
         if end_date and entry.date > end_date:
             continue
         product = entry.product_name
-        total_made[product] = total_made.get(product, 0) + entry.quantity_made
+        key = (product, entry.date)
+        if key not in production_counted:
+            total_made[product] = total_made.get(product, 0) + entry.quantity_made
+            production_counted.add(key)
         total_wasted[product] = total_wasted.get(product, 0) + entry.quantity_left
     summary = {}
     for product, made in total_made.items():
@@ -51,7 +55,7 @@ def waste_summary():
         if data["percent"] is not None:
             print(f"{product}: {data['wasted']} wasted out of {data['made']} made, {data['percent']}% wasted")
         else:
-            print(f"{product}: quantitiy made is 0, cannot calculate percentage")
+            print(f"{product}: quantity made is 0, cannot calculate percentage")
 
 def calculate_todays_production(product_name, production_log, date=None):
     if date is None:

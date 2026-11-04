@@ -19,5 +19,13 @@
         "unit_cost": 0.5325586309999999,
         "unit_price": 3.5,
         "missing_costs": []
+    },
+    {
+        "product_name": "Sourdough",
+        "quantity_made": 30.0,
+        "date": "2026-11-03",
+        "unit_cost": 0.9665112499999999,
+        "unit_price": 4.5,
+        "missing_costs": []
     }
 ]

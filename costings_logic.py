@@ -1,5 +1,5 @@
 from utils import get_unit_type, convert_to_base
-from storage import load_all_products
+from storage import load_all_products, load_stock
 
 def calculate_cost_update(ingredients, name, price, quantity, unit):
     if quantity <=0:
@@ -54,3 +54,16 @@ def build_margin_table(products, ingredients, prices):
         margin, percent = calculate_margin(price, cost)
         table[name] = {'price': price, 'cost': cost, 'missing': missing, 'margin': margin, 'margin_percent': percent}
     return table
+
+def register_ingredients(registry, ingredients_units):
+    updated = dict(registry)
+    for name, unit_type in ingredients_units.items():
+        existing = updated.get(name)
+        if existing is None:
+            updated[name] = {"unit": unit_type, "cost_per_unit": None}
+        elif existing["unit"] is None:
+            if unit_type is not None:
+                updated[name] = {"unit": unit_type, "cost_per_unit": existing["cost_per_unit"]}
+        elif unit_type is not None and existing["unit"] !=unit_type:
+            raise ValueError(f"{name} is tracked in {existing['unit']}, but you entered {unit_type}")
+    return updated

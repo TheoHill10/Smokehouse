@@ -1,31 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Ingredients Costs</h1>
+<h1>Product margins</h1>
 {% if error %}
 <p class="error">{{ error }}</p>
 {% endif %}
 
-<div class="search-box">
-    <input type="text" id="costings-search" placeholder="Search ingredients..." autocomplete="off">
-</div>
-
-
-<table id="costings-table">
+<table>
     <thead>
-        <tr><th>Ingredient</th><th>Unit</th><th>Cost per unit</th></tr>
+        <tr><th>Product</th><th>Selling price</th><th>Cost to make</th><th>Margin</th><th>Margin %</th><th>Missing costs</th></tr>
     </thead>
     <tbody>
-        {% for name, details in ingredients.items() %}
+        {% for name, row in margins.items() %}
         <tr>
             <td>{{ name }}</td>
-            <td>{% if details.unit %}{{ details.unit }}{% else %}not set{% endif %}</td>
-            <td>{% if details.cost_per_unit is none %}not set{% else %}£{{ '%.3f'|format(details.cost_per_unit) }}{% endif %}</td>
+            <td>{% if row.price is none %}no price{% else %}£{{ '%.2f'|format(row.price) }}{% endif %}</td>
+            <td>£{{ '%.2f'|format(row.cost) }}{% if row.missing %} (incomplete){% endif %}</td>
+            <td>{% if row.margin is none %}-{% else %}£{{ '%.2f'|format(row.margin) }}{% endif %}</td>
+            <td>{% if row.margin_percent is none %}-{% else %}{{ '%.1f'|format(row.margin_percent) }}%{% endif %}</td>
+            <td>{{ row.missing|join(', ') }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
 <br>
+
+<h1>Ingredients Costs</h1>
+
+<div class="search-box">
+    <input type="text" id="costings-search" placeholder="Search ingredients..." autocomplete="off">
+</div>
+
+<details class="costings-dropdown">
+    <summary>
+        <table class="costings-heading">
+            <thead>
+                <tr><th>Ingredient</th><th>Unit</th><th>Cost per unit</th></tr>
+            </thead>
+        </table>
+    </summary>
+    <table id="costings-table">
+        <tbody>
+            {% for name, details in ingredients.items() %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{% if details.unit %}{{ details.unit }}{% else %}not set{% endif %}</td>
+                <td>{% if details.cost_per_unit is none %}not set{% else %}£{{ '%.3f'|format(details.cost_per_unit) }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</details>
+
+<br> 
 
 <h2>Update a cost</h2>
 <form method="POST" action="/costings">
@@ -47,27 +74,6 @@
     </label><br>
     <button type="submit">Save cost</button>
 </form>
-
-<br>
-
-<h2>Product margins</h2>
-<table>
-    <thead>
-        <tr><th>Product</th><th>Selling price</th><th>Cost to make</th><th>Margin</th><th>Margin %</th><th>Missing costs</th></tr>
-    </thead>
-    <tbody>
-        {% for name, row in margins.items() %}
-        <tr>
-            <td>{{ name }}</td>
-            <td>{% if row.price is none %}no price{% else %}£{{ '%.2f'|format(row.price) }}{% endif %}</td>
-            <td>£{{ '%.2f'|format(row.cost) }}{% if row.missing %} (incomplete){% endif %}</td>
-            <td>{% if row.margin is none %}-{% else %}£{{ '%.2f'|format(row.margin) }}{% endif %}</td>
-            <td>{% if row.margin_percent is none %}-{% else %}{{ '%.1f'|format(row.margin_percent) }}%{% endif %}</td>
-            <td>{{ row.missing|join(', ') }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
 {% endblock %}
 
