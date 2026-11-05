@@ -1,17 +1,25 @@
 import datetime
 import json
+import os
+from dotenv import load_dotenv
+from extensions import db, migrate
 from flask import Flask, render_template, request, redirect
-from storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products, load_production_log
-from stock_logic import check_reorder_needed
-from production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry, recipe_scaling
-from waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production, calculate_todays_unit_values
-from utils import normalize, convert_to_base, recipe_to_text
-from dashboard_logic import find_highest, calculate_total_production
-from costings_logic import calculate_cost_update, build_margin_table, calculate_price_update, calculate_recipe_cost, register_ingredients
-from recipe_input import parse_ingredient_list
+from services.storage import load_stock, load_all_products, save_stock, log_change, load_waste_log, save_all_products, load_production_log
+from services.stock_logic import check_reorder_needed
+from services.production_input import get_recipe_allergen, calculate_invoice_update, calculate_production_update, calculate_recipe_updated, calculate_production_log_entry, recipe_scaling
+from services.waste_input import calculate_waste_update, calculate_waste_summary, calculate_todays_production, calculate_todays_unit_values
+from services.utils import normalize, convert_to_base, recipe_to_text
+from services.dashboard_logic import find_highest, calculate_total_production
+from services.costings_logic import calculate_cost_update, build_margin_table, calculate_price_update, calculate_recipe_cost, register_ingredients
+from services.recipe_input import parse_ingredient_list
 
-
+load_dotenv()
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+migrate.init_app(app, db)
+
 @app.route("/")
 def home():
     stock = load_stock("data/stock.json")

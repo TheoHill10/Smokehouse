@@ -1,7 +1,7 @@
-from storage import load_all_products, load_stock, save_stock, log_change, save_all_products
-from models import Product, ProductionEntry
+from services.storage import load_all_products, load_stock, save_stock, log_change, save_all_products
+from models.models import Product, ProductionEntry
 import datetime
-from utils import normalize, convert_to_base, find_allergens
+from services.utils import normalize, convert_to_base, find_allergens
 
 def calculate_production_update(product_object, amount, stock):
     ingredients_used = product_object.calculate_ingredients_used(amount)

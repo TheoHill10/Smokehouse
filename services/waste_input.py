@@ -1,6 +1,6 @@
-from utils import normalize
-from models import WasteEntry
-from storage import load_waste_log, log_change
+from services.utils import normalize
+from models.models import WasteEntry
+from services.storage import load_waste_log, log_change
 import datetime
 import json
 

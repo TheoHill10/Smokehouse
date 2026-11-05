@@ -1,6 +1,6 @@
 import json
 import datetime
-from models import Product, AuditEntry, WasteEntry, ProductionEntry
+from models.models import Product, AuditEntry, WasteEntry, ProductionEntry
 
 def save_stock(stock_levels, filepath):
     with open(filepath, "w") as file:

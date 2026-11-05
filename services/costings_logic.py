@@ -1,5 +1,5 @@
-from utils import get_unit_type, convert_to_base
-from storage import load_all_products, load_stock
+from services.utils import get_unit_type, convert_to_base
+from services.storage import load_all_products, load_stock
 
 def calculate_cost_update(ingredients, name, price, quantity, unit):
     if quantity <=0:

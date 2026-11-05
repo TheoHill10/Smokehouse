@@ -1,5 +1,5 @@
 import math
-from utils import normalize, convert_to_base, get_unit_type
+from services.utils import normalize, convert_to_base, get_unit_type
 
 def parse_ingredient_list(items):
     if not isinstance(items, list) or not items:
